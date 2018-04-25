@@ -39,11 +39,11 @@ gem 'typescript-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rais'
+  gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'faker'
-  gem 'pry-rais'
+  gem 'pry-rails'
   gem 'pry-coolline'
   gem 'pry-byebug'
   gem 'pry-doc'
