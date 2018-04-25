@@ -15,7 +15,7 @@
 #
 # Uncomment the following lines to make the configuration take effect.
 
-## Invalid PreCommit Rubocop check for development on windows.
+## Invalidate PreCommit Rubocop check for development on windows.
 # PreCommit:
 #   RuboCop:
 #     enabled: true
