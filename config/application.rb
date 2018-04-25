@@ -25,7 +25,13 @@ module App
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Don't generate system test files.
-    config.generators.system_tests = nil
+    # Set config.generators
+    config.generators do |g|
+      g.skip_routes true
+      g.stylesheets false
+      g.javascripts false
+      g.helper false
+      g.system_tests nil
+    end
   end
 end
