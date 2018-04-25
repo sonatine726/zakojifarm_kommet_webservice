@@ -66,6 +66,8 @@ group :development do
   gem 'binding_of_caller'
   # For coding rules
   gem 'rubocop'
+  # For DB debug
+  gem 'annotate'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
