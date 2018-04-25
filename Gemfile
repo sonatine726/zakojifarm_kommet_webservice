@@ -66,6 +66,7 @@ group :development do
   gem 'binding_of_caller'
   # For coding rules
   gem 'rubocop'
+  gem 'overcommit'
   # For DB debug
   gem 'annotate'
 end
