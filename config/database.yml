@@ -17,5 +17,8 @@ test:
 
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch('DATABASE_USER') { 'lorhkfrfnuwljz' } %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD') { '2ff139df53b2833663f0badd2c49ca44d3adf18204074024886880febb825b03' } %>
   database: app_production
-  
