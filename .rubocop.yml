@@ -1,0 +1,23 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - db/**/*
+
+# Top comments of class and module.
+Documentation:
+  Enabled: false
+
+# Comments of Japanese.
+Style/AsciiComments:
+  Enabled: false
+
+# Line length
+Metrics/LineLength:
+  Max: 120
+
+# Number of lines in block
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+    - config/**/*
