@@ -67,7 +67,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
-    domain: 'gmail.com',
+    domain: 'kommet.herokuapp.com',
     port: 587,
     authentication: :plain,
     user_name: Rails.application.secrets.SMTP_EMAIL,
