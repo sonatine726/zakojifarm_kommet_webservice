@@ -62,7 +62,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "app_#{Rails.env}"
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = {
-    host: 'kommet.herokuapp.com'
+    host: 'localhost'
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
