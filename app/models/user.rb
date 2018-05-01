@@ -23,6 +23,10 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string
+#  avatar_file_name       :string
+#  avatar_content_type    :string
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
 #
 
 class User < ApplicationRecord
@@ -59,5 +63,12 @@ class User < ApplicationRecord
   def validate_name
     errors.add(:name, :invalid) if User.where(email: name).exists?
   end
+
+  has_attached_file :avatar,
+                    styles: { medium: '300x300>', thumb: '100x100>'},
+                    default_url: '/missing.png'
+
+  validates_attachment_content_type :avatar, 
+                                    content_type: %r{\Aimage\/.*\z}
 end
 
