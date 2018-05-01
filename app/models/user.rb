@@ -26,8 +26,14 @@
 #
 
 class User < ApplicationRecord
-  attr_accessor: login
+  validates :name,
+            presence: true,
+            uniqueness: {case_sensitive: false}
 
+  validates_format_of :name, with: /^[a-zA-Z0-9_\.]*$/, multiline: true
+  validate :validate_name
+
+  attr_accessor :login
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -48,4 +54,9 @@ class User < ApplicationRecord
     login = conditions.delete(:login)
 
     where(conditions.to_hash).where(["lower(name) = :value OR lower(email) = :value, {value: login.downcase}"]).first
+  end
+
+  def validate_name
+    errors.add(:name, :invalid) if User.where(email: name).exists?
+  end
 end
