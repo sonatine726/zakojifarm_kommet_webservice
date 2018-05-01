@@ -53,10 +53,11 @@ class User < ApplicationRecord
     conditions[:email].downcase! if conditions[:email]
     login = conditions.delete(:login)
 
-    where(conditions.to_hash).where(["lower(name) = :value OR lower(email) = :value, {value: login.downcase}"]).first
+    where(conditions.to_hash).where(["lower(name) = :value OR lower(email) = :value", {value: login.downcase}]).first
   end
 
   def validate_name
     errors.add(:name, :invalid) if User.where(email: name).exists?
   end
 end
+
