@@ -4,7 +4,7 @@
   .col-10.px-3
     p.my-1
       strong @#{post.user.name} - 
-        span.text-secondary
-          = time_ago_in_words(post.created_at)
-          ago
+      span.text-secondary
+        = time_ago_in_words(post.created_at)
+        |  ago
     = post.body
