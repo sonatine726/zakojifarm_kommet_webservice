@@ -42,6 +42,7 @@ gem 'popper_js', '> 1.12.3'
 gem 'tether-rails'
 gem 'devise'
 gem 'paperclip', '~> 5.0.0'
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
