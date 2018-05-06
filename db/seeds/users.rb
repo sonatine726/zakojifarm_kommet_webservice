@@ -1,9 +1,6 @@
 require "open-uri"
 require 'openssl'
 
-#https://github.com/stympy/fake/issues/763
-OpenSSL:SSL:VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-
 puts 'Start inserting seed "users" ...'
 
 10.times do
@@ -14,7 +11,7 @@ puts 'Start inserting seed "users" ...'
     avatar: open(Faker::Avatar.unique.image(slug = nil, size = '300x300', format='png'))
     })
 
-  puts "\"#{{user.name}}\" has created!"
+  puts "\"#{user.name}\" has created!"
 
   user.confirm
 end
