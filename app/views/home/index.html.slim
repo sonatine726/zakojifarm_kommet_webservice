@@ -6,7 +6,9 @@ h1 米っと [ #{@user.name} ]
       .card-body
         h4.card-title #{@user.name}
         p.card-text
-          span.text-secondary ユーザーの情報がここに入ります。
+          span.text-secondary #{@user.created_month}に登録
+          br
+          span.text-secondary #{@user.posts_count} posts
   .col-md-9.col-12
     =form_with local: true, model: Post.new do |f|
       .input-group.pb-4.mx-0
