@@ -8,7 +8,7 @@ h1 米っと [ #{@user.name} ]
         p.card-text
           span.text-secondary ユーザーの情報がここに入ります。
   .col-md-9.col-12
-    =form_with model: Post.new do |f|
+    =form_with local: true, model: Post.new do |f|
       .input-group.pb-4.mx-0
         =f.text_field :body, class: "form-control", placeholder: "今なにしている？"
         span.input-group-btn
