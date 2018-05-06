@@ -27,6 +27,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  posts_count            :integer          default(0), not null
 #
 
 class User < ApplicationRecord
@@ -63,6 +64,10 @@ class User < ApplicationRecord
 
   def validate_name
     errors.add(:name, :invalid) if User.where(email: name).exists?
+  end
+
+  def created_month
+    created_at.strftime('%Y年%m月')
   end
 
   has_attached_file :avatar,

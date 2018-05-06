@@ -27,10 +27,14 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  posts_count            :integer          default(0), not null
 #
 
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'ユーザーの生年月日が返されること' do
+    user = User.new(email: 'hoge@example.com', created_at: Time.utc(2015, 1, 1, 12, 0, 0))
+    expect(user.created_month).to eq '2015年01月'
+  end
 end
