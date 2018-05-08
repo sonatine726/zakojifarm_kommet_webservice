@@ -58,6 +58,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-doc'
   gem 'faker'
+  gem 'shoulda-matchers'
+  gem 'rspec-its'
 end
 
 group :development do
