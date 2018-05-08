@@ -7,11 +7,11 @@ RSpec.describe PostsController, type: :controller do
     context "valid post" do
       let(:user){FactoryBot.create(:user)}
       before do
+        user.confirm
         sign_in user
-        get :create, params: { body: 'test' }
+        post :create, params: { post: {body: 'test'} }
       end
 
-      # pending 'Not update test yet.'
       its(:response) {is_expected.to have_http_status(302)}
       its(:response) {is_expected.to redirect_to(:root)}
       it { should set_flash[:notice].to('Post was successfully created.')}
