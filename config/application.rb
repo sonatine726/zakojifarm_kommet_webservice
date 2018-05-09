@@ -33,5 +33,13 @@ module App
       g.helper false
       g.system_tests nil
     end
+
+    # Timezone
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+
+    # i18n
+    config.i18n.available_locales = [:en, :ja]
+    config.i18n.default_locale = :ja
   end
 end
