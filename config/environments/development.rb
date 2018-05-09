@@ -28,7 +28,7 @@ Rails.application.configure do
 
   config.read_encrypted_secrets = true
 
-  config.logger = Logger.new('log/development.log')
+  config.logger = Logger.new('log/development.log', 5, 1*1024*1024)
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
