@@ -45,6 +45,7 @@ gem 'paperclip', '~> 5.0.0'
 gem 'kaminari'
 gem 'counter_culture'
 gem 'activeadmin'
+gem 'secure_headers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
