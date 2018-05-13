@@ -46,7 +46,6 @@ gem 'kaminari'
 gem 'counter_culture'
 gem 'activeadmin'
 gem 'secure_headers'
-gem 'erb2slim'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -79,6 +78,8 @@ group :development do
   gem 'overcommit'
   # For DB debug
   gem 'annotate'
+
+  gem 'html2slim'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
