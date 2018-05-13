@@ -46,7 +46,7 @@ gem 'kaminari'
 gem 'counter_culture'
 gem 'activeadmin'
 
-group :procution do
+group :production do
   gem 'secure_headers'
 end
 
