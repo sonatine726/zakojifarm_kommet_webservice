@@ -81,6 +81,8 @@ group :development do
   gem 'overcommit'
   # For DB debug
   gem 'annotate'
+
+  gem 'html2slim'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
