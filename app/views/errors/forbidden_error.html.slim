@@ -1,0 +1,12 @@
+section.container.text-center
+  h1 403 Forbidden
+  h2 閲覧が許可されていません
+  section.mt-5
+    - case @exception
+    - when IpAddressRejectedError
+      = "あなたのIPアドレス(#{request.ip})からは利用できません。"
+    - else
+      = "指定されたページを閲覧する権限がありません。"
+    | お手数ですが<a href="/">ホームページ</a>にお戻りください。
+  section.mt-3
+    = image_tag('/ojisan_apologize.png', class:"w-50 img-responsive", alt:"apoligize for 403")

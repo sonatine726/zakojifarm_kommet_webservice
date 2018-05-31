@@ -1,0 +1,1 @@
+class IpAddressRejectedError < StandardError; end
