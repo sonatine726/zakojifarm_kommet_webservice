@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from ForbiddenError, with: :rescue403
   rescue_from IpAddressRejectedError, with: :rescue403
+  rescue_from ActionController::RoutingError, with: :rescue404
+  rescue_from ActiveRecord::RecordNotFound, with: :rescue404
 
   protected
 
@@ -27,5 +29,10 @@ class ApplicationController < ActionController::Base
   def rescue403(e)
     @exception = e
     render 'errors/forbidden_error', status: 403
+  end
+
+  def rescue404(e)
+    @exception = e
+    render 'errors/not_found_error', status: 404
   end
 end
