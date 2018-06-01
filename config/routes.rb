@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
   resources :posts, only: [:create]
+
+  get '*anything' => 'errors#routing_error'
 end
 
