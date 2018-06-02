@@ -21,17 +21,21 @@ require 'rails_helper'
 
 RSpec.describe StaffMember, type: :model do
   describe '#password=' do
-    it '文字列を与えると、hashed_passwordは長さ60の文字列になる' do
-      member = StaffMember.new
-      member.password = 'test'
-      expect(member.hashed_password).to be_kind_of(String)
-      expect(member.hashed_password.size).to eq(60)
+    context '文字列を与える' do
+      let(:member) {StaffMember.new}
+      it 'hashed_passwordは長さ60の文字列になる' do
+        member.password = 'test'
+        expect(member.hashed_password).to be_kind_of(String)
+        expect(member.hashed_password.size).to eq(60)
+      end
     end
 
-    it 'nilを与えると、hashed_passwordはnilになる' do
-      member = StaffMember.new
-      member.password = nil
-      expect(member.hashed_password).to be_nil
+    context 'nilを与える' do
+      let(:member) {StaffMember.new}
+      it 'hashed_passwordはnilになる' do
+        member.password = nil
+        expect(member.hashed_password).to be_nil
+      end
     end
   end
 end
