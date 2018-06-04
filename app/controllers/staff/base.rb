@@ -1,4 +1,6 @@
 class Staff::Base < ApplicationController
+  layout 'staff'
+
   private
   def current_staff_member
     if session[:staff_member_id]
