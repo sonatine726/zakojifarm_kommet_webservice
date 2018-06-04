@@ -28,7 +28,7 @@
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
 #  posts_count            :integer          default(0), not null
-#  role                   :integer          default(0), not null
+#  role                   :integer          default("user"), not null
 #
 
 require 'rails_helper'

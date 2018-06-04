@@ -1,0 +1,11 @@
+= form_for @form, url: :staff_session, html:{class:"my-4 p-staff-login-form"} do |f|
+  .form-group.p-staff-form-email
+    = f.label :email, 'メールアドレス'
+    .form-inline
+      = f.text_field :email, class:"form-control input-sm", size: "40"
+  .form-group.p-staff-form-password
+    = f.label :password, 'パスワード'
+    .form-inline
+      = f.password_field :password, class:"form-control input-sm", size: "65"
+  .p-staff-form-submit
+    = f.submit 'ログイン', class:"btn btn-default"

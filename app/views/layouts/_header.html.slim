@@ -1,5 +1,6 @@
 nav.navbar.bg-dark.navbar-dark
   a.navbar-brand href="/" = ApplicationHelper::APP_NAME
+  span.text-white #{@title}
   - if user_signed_in?
     ul.nav.justify-content-end
       li.nav-item
