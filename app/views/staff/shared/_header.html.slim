@@ -1,13 +1,12 @@
 nav.navbar.bg-dark.navbar-dark
   a.navbar-brand href="/" = ApplicationHelper::APP_NAME
-  span.text-white #{@title}
   ul.nav.justify-content-end
     - if current_staff_member
       li.nav-item
         = link_to "ログアウト", :staff_session, method: :delete, class: "nav-link text-secondary"
     - else
       li.nav-item
-        = link_to "ログイン", :staff_session, class: "nav-link text-secondary"
+        = link_to_unless_current "ログイン", :staff_login, class: "nav-link text-secondary"
   = link_to "お米の座光寺農園", 'https://zakojifarm.jp/', class: "nav-link text-info"
 
 
