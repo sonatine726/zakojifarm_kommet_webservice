@@ -1,0 +1,12 @@
+nav.navbar.bg-dark.navbar-dark
+  a.navbar-brand href="/" = ApplicationHelper::APP_NAME
+  ul.nav.justify-content-end
+    - if current_admin_member
+      li.nav-item
+        = link_to "ログアウト", :admin_session, method: :delete, class: "nav-link text-secondary"
+    - else
+      li.nav-item
+        = link_to_unless_current "ログイン", :admin_login, class: "nav-link text-secondary"
+  = link_to "お米の座光寺農園", 'https://zakojifarm.jp/', class: "nav-link text-info"
+
+

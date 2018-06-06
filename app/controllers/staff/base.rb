@@ -1,5 +1,5 @@
 class Staff::Base < ApplicationController
-  layout 'staff'
+  layout 'staff/staff'
 
   private
   def current_staff_member
