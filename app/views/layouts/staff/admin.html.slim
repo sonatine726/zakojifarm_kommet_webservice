@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title = page_title
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+  body
+    == render 'staff/admin/shared/header'
+    .container.py-4.px-0
+      = flash_message(flash[:success], :success) if flash[:success]
+      = flash_message(flash[:error], :danger) if flash[:error]
+      = flash_message(flash[:alert], :warning) if flash[:alert]
+      = flash_message(flash[:notice], :info) if flash[:notice]
+      section.p-staff_page_header
+        section.p-staff_page_title #{@title}
+      == yield
+    == render 'staff/shared/footer'
