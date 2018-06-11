@@ -101,4 +101,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.kommet = {
+    staff: {host: 'kommet.herokuapp.com', path: 'staff'},
+    admin: {host: 'kommet.herokuapp.com', path: 'admin'},
+    customer: {host: 'kommet.herokuapp.com', path: 'mypage'}
+  }
 end

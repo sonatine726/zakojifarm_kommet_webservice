@@ -1,22 +1,27 @@
 Rails.application.routes.draw do
+  config = Rails.application.config.kommet
+
   ActiveAdmin.routes(self)
   devise_for :users
   root 'home#index'
   resources :posts, only: [:create]
 
-  namespace :staff do
-    root 'top#index'
-    get 'login' => 'sessions#new', as: :login
-    post 'session' => 'sessions#create', as: :session
-    delete 'session' => 'sessions#destroy'
+  constraints host: config[:staff][:host] do
+    namespace :staff , path: config[:staff][:path] do
+      root 'top#index'
+      get 'login' => 'sessions#new', as: :login
+      resource :session, only: [ :create, :destroy ]
+      resource :account, only: [ :show, :edit, :update ]
+    end
   end
 
-  namespace :admin, module: 'staff/admin' do
-    root 'top#index'
-    get 'login' => 'sessions#new', as: :login
-    post 'session' => 'sessions#create', as: :session
-    delete 'session' => 'sessions#destroy'
-    resources :staff_members
+  constraints host: config[:admin][:host] do
+    namespace :admin, path: config[:admin][:path], module: 'staff/admin' do
+      root 'top#index'
+      get 'login' => 'sessions#new', as: :login
+      resource :session, only: [ :create, :destroy ]
+      resources :staff_members
+    end
   end
 
   get '*anything' => 'errors#routing_error'

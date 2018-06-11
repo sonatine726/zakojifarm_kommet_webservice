@@ -44,4 +44,10 @@ Rails.application.configure do
     host: 'localhost',
     port: 3000
   }
+
+  config.kommet = {
+    staff: {host: 'kommet.com', path: 'staff'},
+    admin: {host: 'kommet.com', path: 'admin'},
+    customer: {host: 'kommet.com', path: 'mypage'}
+  }
 end
