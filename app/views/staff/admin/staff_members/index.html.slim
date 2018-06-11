@@ -1,0 +1,30 @@
+.table-wrapper
+  .links.text-right
+    = link_to '新規登録', :new_admin_staff_member
+
+  table.table.table-striped.table-bordered.table-hover.p-staff-tbl
+    thead
+      tr
+        th 氏名
+        th フリガナ
+        th メールアドレス
+        th 開始日
+        th 終了日
+        th 停止フラグ
+        th アクション
+      tbody
+        - @staff_members.each do |m|
+          tr
+            td "#{m.family_name} #{m.given_name}"
+            td "#{m.family_name_kana} #{m.given_name_kana}"
+            td.p-staff-tbl__email = m.email
+            td.p-staff-tbl__date = m.start_date.strftime('%Y.%m/%d')
+            td.p-staff-tbl__date = m.end_date.try(:strftime, '%Y.%m/%d')
+            td.p-staff-tbl__boolean = m.suspended? ? raw('&#x2611;') : raw('&#x2610;')
+            td.p-staff-tbl__actions
+              = link_to '編集', [:edit, :admin, m]
+              | |
+              = link_to '削除', [:admin, m], method: :delete, data:{confirm: '本当に削除しますか?'}
+
+  .links.text-right
+    = link_to '新規登録', :new_admin_staff_member

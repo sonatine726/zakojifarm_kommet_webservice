@@ -12,3 +12,12 @@
   border: solid 1px $dark_cyan;
   background-color: $very_light_gray;
 }
+
+.p-staff-tbl{
+  .p-staff-tbl__email, .p-staff-tbl__date {font-family: monospace;}
+  .p-staff-tbl__boolean {text-align: center}
+  .p-staff-tbl__actions{
+    text-align: center;
+    color: $dark_gray;
+  }
+}

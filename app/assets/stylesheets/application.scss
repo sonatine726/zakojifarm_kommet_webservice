@@ -14,3 +14,27 @@
  *= require_self
  */
 @import "bootstrap";
+@import 'colors';
+@import 'dimensions';
+
+.p-head-logo{
+  float: none;
+  text-decoration: none;
+}
+
+form{
+  label.required:after{
+    content: '*';
+    padding-left: $narrow;
+    color:$red;
+  }
+  input.btn {
+    @extend .btn;
+  }
+  input.btn-lg {
+    @extend .btn-lg;
+  }
+  input.btn-primary {
+    @extend .btn-primary;
+  }
+}

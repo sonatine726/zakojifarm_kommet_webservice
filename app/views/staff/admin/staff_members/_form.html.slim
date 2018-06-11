@@ -1,0 +1,37 @@
+.text-right
+  small.notes
+    <span>*</span> 印の付いた項目は入力必須です。
+.py-3
+  .form-group.p-admin-staffform-email
+    = f.label :email, 'メールアドレス', class:"required mr-4"
+    .form-inline
+     = f.text_field :email, class:"form-control input-sm", size:"32", required: true
+  - if f.object.new_record?
+    .form-group.p-admin-staffform-password
+      = f.label :password, 'パスワード', class:"required mr-4"
+      .form-inline
+        = f.password_field :password, class:"form-control input-sm", size: "60"
+  .form-group.p-admin-staffform-name
+    = f.label :family_name, '氏名', class:"required mr-4"
+    .form-inline
+      = f.text_field :family_name, required:true, class:"form-control input-sm mr-2", size: "15"
+      = f.text_field :given_name, required:true, class:"form-control input-sm", size: "15"
+  .form-group.p-admin-staffform-kana
+    = f.label :family_name_kana, 'フリガナ', class:"required mr-4"
+    .form-inline
+      = f.text_field :family_name_kana, required:true, class:"form-control input-sm mr-2", size: "15"
+      = f.text_field :given_name_kana, required:true, class:"form-control input-sm", size: "15"
+  .form-group.p-admin-staffform-start
+    = f.label :start_date, '開始日', class:"required mr-4"
+    .form-inline
+      = f.text_field :start_date, required:true, class:"form-control input-sm", size: "20"
+  .form-group.p-admin-staffform-end
+    = f.label :end_date, '終了日', class:"mr-4"
+    .form-inline
+      = f.text_field :end_date, class:"form-control input-sm", size: "20"
+  .form-group.p-admin-staffform-suspended
+    .form-inline
+      = f.check_box :suspended, class:"form-control input-sm mx-4"
+      = f.label :suspended, 'アカウント停止'
+
+

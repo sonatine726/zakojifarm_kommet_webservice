@@ -79,4 +79,10 @@ Rails.application.configure do
 
   # gem 'better_errors'
   BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
+
+  config.kommet = {
+    staff: {host: 'kommet.com', path: 'staff'},
+    admin: {host: 'kommet.com', path: 'admin'},
+    customer: {host: 'kommet.com', path: 'mypage'}
+  }
 end
