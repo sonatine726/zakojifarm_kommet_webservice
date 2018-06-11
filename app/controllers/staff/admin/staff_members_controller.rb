@@ -5,12 +5,17 @@ class Staff::Admin::StaffMembersController < Staff::Admin::Base
   end
 
   def show
-    staff_member = StaffMember.find(param[:id])
+    staff_member = StaffMember.find(params[:id])
     redirect_to [:edit, :admin, staff_member]
   end
 
   def new
     @title = '職員の新規登録'
     @staff_member = StaffMember.new
+  end
+
+  def edit
+    @title = '職員アカウントの編集'
+    @staff_member = StaffMember.find(params[:id])
   end
 end

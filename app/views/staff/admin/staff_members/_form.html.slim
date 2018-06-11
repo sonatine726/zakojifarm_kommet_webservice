@@ -6,10 +6,11 @@
     = f.label :email, 'メールアドレス', class:"required mr-4"
     .form-inline
      = f.text_field :email, class:"form-control input-sm", size:"32", required: true
-  .form-group.p-admin-staffform-password
-    = f.label :password, 'パスワード', class:"required mr-4"
-    .form-inline
-      = f.password_field :password, class:"form-control input-sm", size: "60"
+  - if f.object.new_record?
+    .form-group.p-admin-staffform-password
+      = f.label :password, 'パスワード', class:"required mr-4"
+      .form-inline
+        = f.password_field :password, class:"form-control input-sm", size: "60"
   .form-group.p-admin-staffform-name
     = f.label :family_name, '氏名', class:"required mr-4"
     .form-inline
