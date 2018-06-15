@@ -1,4 +1,6 @@
 class Staff::SessionsController < Staff::Base
+  skip_before_action :check_staff_login, only: [:new, :create]
+
   def new
     @title = 'スタッフ ログイン'
     if current_staff_member
