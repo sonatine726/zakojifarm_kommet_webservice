@@ -10,6 +10,7 @@ module ErrorHandlers
     rescue_from IpAddressRejectedError, with: :rescue403
     rescue_from ActionController::RoutingError, with: :rescue404
     rescue_from ActiveRecord::RecordNotFound, with: :rescue404
+    rescue_from ActionController::ParameterMissing, with: :rescue400
   end
 
   private
@@ -21,5 +22,10 @@ module ErrorHandlers
   def rescue404(e)
     @exception = e
     render 'errors/not_found_error', status: 404
+  end
+
+  def rescue400(e)
+    @exception = e
+    render 'errors/bad_request_error', status: 400
   end
 end

@@ -1,0 +1,8 @@
+section.container.text-center
+  h1 400 Bad Request
+  h2 不正な要求です。
+  section.mt-5
+    p #{request.url}
+    | お手数ですが<a href="/">ホームページ</a>にお戻りください。
+  section.mt-3
+    = image_tag('/ojisan_apologize.png', class:"w-50 img-responsive", alt:"apoligize for 403")
