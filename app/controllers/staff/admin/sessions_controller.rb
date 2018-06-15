@@ -1,4 +1,6 @@
 class Staff::Admin::SessionsController < Staff::Admin::Base
+  skip_before_action :check_admin_login, only: [:new, :create]
+
   def new
     @title = '管理者 ログイン'
     if current_admin_member
