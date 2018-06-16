@@ -1,0 +1,21 @@
+.links.text-right
+    = link_to 'アカウント情報編集', :edit_staff_account
+table.table.table-striped.table-bordered.container
+  tr.row.mx-0
+    th.col-4 氏名
+    td.col-8
+      = @staff_member.family_name
+      = @staff_member.given_name
+  tr.row.mx-0
+    th.col-4 フリガナ
+    td.col-8
+      = @staff_member.family_name_kana
+      = @staff_member.given_name_kana
+  tr.row.mx-0
+    th.col-4 メールアドレス
+    td.col-8
+      = @staff_member.email
+  tr.row.mx-0
+    th.col-4 開始日
+    td.col-8
+      = @staff_member.start_date.strftime('%Y.%m/%d')
