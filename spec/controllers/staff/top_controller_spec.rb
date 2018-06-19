@@ -20,6 +20,13 @@ describe Staff::TopController, type: :controller do
         expect(session[:staff_member_id]).to be_nil
         expect(response).to redirect_to(staff_login_url)
       end
+
+      it 'セッションタイムアウト' do
+        session[:last_access_time] = Staff::Base::TIMEOUT.ago.advance(secondes:-1)
+        get :index
+        expect(session[:staff_member_id]).to be_nil
+        expect(response).to redirect_to(staff_login_url)
+      end
     end
   end
 end
