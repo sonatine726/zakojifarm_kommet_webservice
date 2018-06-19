@@ -1,0 +1,5 @@
+= form_for @staff_member, url: :staff_account, html:{class:"my-4"} do |f|
+  == render 'form', f:f
+  .buttons.pl-5
+    = f.submit '更新', class:"btn btn-lg btn-primary"
+    = link_to 'キャンセル', :staff_account
