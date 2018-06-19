@@ -6,6 +6,7 @@ RSpec.describe Staff::AccountsController, type: :controller do
     let(:staff_member){create(:staff_member)}
     before do
       session[:staff_member_id] = staff_member.id
+      session[:last_access_time] = 1.second.ago
     end
 
     it 'email属性を変更' do
