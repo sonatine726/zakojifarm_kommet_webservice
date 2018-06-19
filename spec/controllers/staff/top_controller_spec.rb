@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Staff::TopController, type: :controller do
+  context 'ログイン前' do
+    it_behaves_like 'a protected staff controller'
+  end
+
   context 'ログイン後' do
     let(:staff_member){create(:staff_member)}
     before do
