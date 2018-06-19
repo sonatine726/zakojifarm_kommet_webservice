@@ -3,12 +3,39 @@ class Staff::Base < ApplicationController
 
   skip_before_action :authenticate_user!
   before_action :check_staff_login
-  before_action :check_account
-  before_action :check_timeout
+
+  include SessionValidityModule
+
+  protected
+  def current_member
+    current_staff_member
+  end
+
+  def root_url
+    :staff_root
+  end
+
+  def login_url
+    :staff_login
+  end
+
+  def target_model
+    StaffMember
+  end
+
+  def session_id
+    :staff_member_id
+  end
+
+  def last_access_time_id
+    :staff_last_access_time
+  end
+
+  def session_name
+    'スタッフ'
+  end
 
   private
-  TIMEOUT = 60.minutes
-
   def current_staff_member
     if session[:staff_member_id]
       @current_staff_member ||= StaffMember.find_by(id: session[:staff_member_id])
@@ -19,26 +46,6 @@ class Staff::Base < ApplicationController
     unless current_staff_member
       flash.alert = 'スタッフとしてログインしてください。'
       redirect_to :staff_login
-    end
-  end
-
-  def check_account
-    if current_staff_member && !current_staff_member.active?
-      session.delete(:staff_member_id)
-      flash.alert = 'アカウントが無効になりました。'
-      redirect_to :staff_login
-    end
-  end
-
-  def check_timeout
-    if current_staff_member
-      if session[:last_access_time] >= TIMEOUT.ago
-        session[:last_access_time] = Time.current
-      else
-        session.delete(:staff_member_id)
-        flash.alert = 'セッションがタイムアウトしました。'
-        redirect_to :staff_login
-      end
     end
   end
 

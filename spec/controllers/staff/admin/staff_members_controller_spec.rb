@@ -10,6 +10,7 @@ RSpec.describe Staff::Admin::StaffMembersController, type: :controller do
     before do
       admin_for_test = create(:admin_member)
       session[:admin_member_id] = admin_for_test.id
+      session[:admin_last_access_time] = 1.second.ago
     end
 
     describe "#create" do

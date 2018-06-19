@@ -5,7 +5,7 @@ describe Staff::TopController, type: :controller do
     let(:staff_member){create(:staff_member)}
     before do
       session[:staff_member_id] = staff_member.id
-      session[:last_access_time] = 1.second.ago
+      session[:staff_last_access_time] = 1.second.ago
     end
 
     describe '#index' do
@@ -22,7 +22,7 @@ describe Staff::TopController, type: :controller do
       end
 
       it 'セッションタイムアウト' do
-        session[:last_access_time] = Staff::Base::TIMEOUT.ago.advance(secondes:-1)
+        session[:staff_last_access_time] = Staff::SessionsController::TIMEOUT.ago.advance(secondes:-1)
         get :index
         expect(session[:staff_member_id]).to be_nil
         expect(response).to redirect_to(staff_login_url)
