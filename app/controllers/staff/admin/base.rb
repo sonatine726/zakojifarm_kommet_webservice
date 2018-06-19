@@ -13,6 +13,7 @@ class Staff::Admin::Base < ApplicationController
 
   def check_admin_login
     unless current_admin_member
+      flash.alert = '管理者としてログインしてください。'
       redirect_to :admin_login
     end
   end

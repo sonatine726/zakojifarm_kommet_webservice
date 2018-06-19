@@ -13,6 +13,7 @@ class Staff::Base < ApplicationController
 
   def check_staff_login
     unless current_staff_member
+      flash.alert = 'スタッフとしてログインしてください。'
       redirect_to :staff_login
     end
   end
