@@ -4,6 +4,37 @@ class Staff::Base < ApplicationController
   skip_before_action :authenticate_user!
   before_action :check_staff_login
 
+  include SessionValidityModule
+
+  protected
+  def current_member
+    current_staff_member
+  end
+
+  def root_url
+    :staff_root
+  end
+
+  def login_url
+    :staff_login
+  end
+
+  def target_model
+    StaffMember
+  end
+
+  def session_id
+    :staff_member_id
+  end
+
+  def last_access_time_id
+    :staff_last_access_time
+  end
+
+  def session_name
+    'スタッフ'
+  end
+
   private
   def current_staff_member
     if session[:staff_member_id]
@@ -13,6 +44,7 @@ class Staff::Base < ApplicationController
 
   def check_staff_login
     unless current_staff_member
+      flash.alert = 'スタッフとしてログインしてください。'
       redirect_to :staff_login
     end
   end

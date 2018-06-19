@@ -1,0 +1,20 @@
+.text-right
+  small.notes
+    <span>*</span> 印の付いた項目は入力必須です。
+.py-3
+  .form-group
+    = f.label :email, 'メールアドレス', class:"required mr-4"
+    .form-inline
+     = f.text_field :email, class:"form-control input-sm", size:"32", required: true
+  .form-group
+    = f.label :family_name, '氏名', class:"required mr-4"
+    .form-inline
+      = f.text_field :family_name, required:true, class:"form-control input-sm mr-2", size: "15"
+      = f.text_field :given_name, required:true, class:"form-control input-sm", size: "15"
+  .form-group
+    = f.label :family_name_kana, 'フリガナ', class:"required mr-4"
+    .form-inline
+      = f.text_field :family_name_kana, required:true, class:"form-control input-sm mr-2", size: "15"
+      = f.text_field :given_name_kana, required:true, class:"form-control input-sm", size: "15"
+
+
