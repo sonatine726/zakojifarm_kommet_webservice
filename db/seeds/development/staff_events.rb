@@ -13,4 +13,5 @@ staff_members = StaffMember.all
   end
   e.occurred_at = (256-n).hours.ago
   e.save!
+  pp e
 end
