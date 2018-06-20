@@ -27,7 +27,7 @@ given_names = %w{
   fn = family_names[n%4].split(':')
   gn = given_names[n%5].split(':')
 
-  StaffMember.create!(
+  created_staff = StaffMember.create!(
     email: "#{fn[2]}.#{gn[2]}@example.com",
     family_name: fn[0],
     given_name: gn[0],
@@ -38,4 +38,5 @@ given_names = %w{
     end_date: n == 0? Date.today : nil,
     suspended: n == 1
   )
+  pp created_staff
 end
