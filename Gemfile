@@ -45,6 +45,8 @@ gem 'paperclip', '~> 5.0.0'
 gem 'kaminari'
 gem 'counter_culture'
 gem 'activeadmin'
+gem 'date_validator'
+gem 'email_validator'
 
 group :production do
   gem 'secure_headers'

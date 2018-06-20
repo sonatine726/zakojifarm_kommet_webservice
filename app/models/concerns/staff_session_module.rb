@@ -1,9 +1,15 @@
 module StaffSessionModule
   extend ActiveSupport::Concern
 
+  include StringNomalizer
+
   included do
     before_validation do
       self.email_for_index = email.downcase if email
+      self.family_name = normalize_as_name(family_name)
+      self.given_name = normalize_as_name(given_name)
+      self.family_name_kana = normalize_as_furigana(family_name_kana)
+      self.given_name_kana = normalize_as_furigana(given_name_kana)
     end
   end
 

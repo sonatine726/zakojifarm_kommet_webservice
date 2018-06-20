@@ -21,3 +21,8 @@
     color: $dark_gray;
   }
 }
+
+div.field_with_errors{
+  label { color: $red; }
+  input { background-color: $pink; }
+}
