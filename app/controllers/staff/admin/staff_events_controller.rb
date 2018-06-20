@@ -6,6 +6,7 @@ class Staff::Admin::StaffEventsController < Staff::Admin::Base
     else
       @events = StaffEvent.order(occurred_at: :desc)
     end
+    @events = @events.page(params[:page])
 
     if @staff_member
       full_name = @staff_member.family_name + @staff_member.given_name

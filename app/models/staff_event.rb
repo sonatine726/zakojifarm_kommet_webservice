@@ -15,4 +15,6 @@ class StaffEvent < ApplicationRecord
   alias_attribute :occurred_at, :created_at
 
   enum type: {unknown: 0, logged_in: 1, logged_out: 2, rejected: 3}
+
+  paginates_per 20
 end
