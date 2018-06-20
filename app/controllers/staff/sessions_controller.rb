@@ -13,6 +13,6 @@ class Staff::SessionsController < Staff::Base
   end
 
   def hook_destroy(target_member)
-    target_member.events.create!(type: 'loggend_out')
+    target_member.events.create!(type: 'logged_out')
   end
 end
