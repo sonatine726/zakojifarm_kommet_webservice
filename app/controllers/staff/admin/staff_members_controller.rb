@@ -25,6 +25,7 @@ class Staff::Admin::StaffMembersController < Staff::Admin::Base
       flash.notice = '職員アカウントを新規登録しました。'
       redirect_to :admin_staff_members
     else
+      flash.now.alert = '職員アカウントの新規登録に失敗しました。'
       render action: 'new'
     end
   end
@@ -36,6 +37,7 @@ class Staff::Admin::StaffMembersController < Staff::Admin::Base
       flash.notice = '職員アカウントを更新しました。'
       redirect_to :admin_staff_members
     else
+      flash.now.alert = '職員アカウントの更新に失敗しました。'
       render action: 'edit'
     end
   end

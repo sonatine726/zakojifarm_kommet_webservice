@@ -19,5 +19,6 @@
 
 class StaffMember < ApplicationRecord
   include StaffSessionModule
+
   has_many :events, class_name: 'StaffEvent', dependent: :destroy
 end
