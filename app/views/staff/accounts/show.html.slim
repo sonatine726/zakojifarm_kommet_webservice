@@ -1,21 +1,28 @@
 .links.text-right
-    = link_to 'アカウント情報編集', :edit_staff_account
-table.table.table-striped.table-bordered.container
-  tr.row.mx-0
-    th.col-4 氏名
-    td.col-8
-      = @staff_member.family_name
-      = @staff_member.given_name
-  tr.row.mx-0
-    th.col-4 フリガナ
-    td.col-8
-      = @staff_member.family_name_kana
-      = @staff_member.given_name_kana
-  tr.row.mx-0
-    th.col-4 メールアドレス
-    td.col-8
-      = @staff_member.email
-  tr.row.mx-0
-    th.col-4 開始日
-    td.col-8
-      = @staff_member.start_date.strftime('%Y.%m/%d')
+    => link_to ' アカウント情報編集', :edit_staff_account
+    | |
+    =< link_to 'パスワード変更', :edit_staff_password
+.table_wrapper.row.py-5
+  table.table.table-striped.table-bordered.container.col-8
+    tr.row.mx-0
+      th.col-3 氏名
+      td.col-9
+        = @staff_member.family_name
+        = @staff_member.given_name
+    tr.row.mx-0
+      th.col-3 フリガナ
+      td.col-9
+        = @staff_member.family_name_kana
+        = @staff_member.given_name_kana
+    tr.row.mx-0
+      th.col-3 メールアドレス
+      td.col-9
+        = @staff_member.email
+    tr.row.mx-0
+      th.col-3 パスワード
+      td.col-9.password
+        | ***********
+    tr.row.mx-0
+      th.col-3 開始日
+      td.col-9
+        = @staff_member.start_date.strftime('%Y.%m/%d')
