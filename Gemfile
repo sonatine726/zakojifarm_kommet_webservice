@@ -47,6 +47,7 @@ gem 'counter_culture'
 gem 'activeadmin'
 gem 'date_validator'
 gem 'email_validator'
+gem 'nokogiri'
 
 group :production do
   gem 'secure_headers'
