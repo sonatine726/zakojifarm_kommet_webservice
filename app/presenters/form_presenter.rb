@@ -31,7 +31,7 @@ class FormPresenter
     markup(:div, class: options[:class_top_div]) do |m|
       m << decorated_label(name, label_text, options)
       m.div(class: options[:class_between_label_and_password]) do |m|
-        m << password_field(name, class: options[:class_passwordf], size: options[:passwordf_size])
+        m << password_field(name, class: options[:class_passwordf], size: options[:passwordf_size], required: options[:required] ? true : false)
       end
       m << error_messages_for(name)
     end
