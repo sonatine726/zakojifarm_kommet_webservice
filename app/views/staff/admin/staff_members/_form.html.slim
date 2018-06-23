@@ -2,10 +2,11 @@
 .text-right
   = p.notes
 .py-3
-  = p.text_field_block(:email, 'メールアドレス', class_top_div: 'form-group p-admin-staffform-email', required: true, class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 32)
-  = p.password_field_block(:password, 'パスワード', class_top_div: 'form-group p-admin-staffform-password', required: true, class_label: 'mr-4', class_between_label_and_password: 'form-inline', class_passwordf: 'form-control input-sm', textf_size: 60)
-  = p.full_name_block(:family_name, :given_name, '氏名', class_top_div: 'form-group p-admin-staffform-name', required: true, class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf_1: 'form-control input-sm mr-2', class_textf_2: 'form-control input-sm mr-2', textf_size: 25)
-  = p.full_name_block(:family_name_kana, :given_name_kana, 'フリナガ', class_top_div: 'form-group p-admin-staffform-kana', required: true, class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf_1: 'form-control input-sm mr-2', class_textf_2: 'form-control input-sm mr-2', textf_size: 25)
-  = p.date_field_block(:start_date, '開始日', class_top_div: 'form-group p-admin-staffform-start', required: true, class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 20)
-  = p.date_field_block(:end_date, '終了日', class_top_div: 'form-group p-admin-staffform-end', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 20)
-  = p.check_boxes(:suspended, 'アカウント停止', class_top_div: 'form-group p-admin-staffform-suspended', class_before_checkbox: 'form-inline', class_checkbox: 'form-control input-sm mx-4')
+  - p.with_options(required: true) do |q|
+    = q.text_field_block(:email, 'メールアドレス', class_top_div: 'form-group p-admin-staffform-email', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 32)
+    = q.password_field_block(:password, 'パスワード', class_top_div: 'form-group p-admin-staffform-password', class_label: 'mr-4', class_between_label_and_password: 'form-inline', class_passwordf: 'form-control input-sm', textf_size: 60)
+    = q.full_name_block(:family_name, :given_name, '氏名', class_top_div: 'form-group p-admin-staffform-name', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf_1: 'form-control input-sm mr-2', class_textf_2: 'form-control input-sm mr-2', textf_size: 25)
+    = q.full_name_block(:family_name_kana, :given_name_kana, 'フリナガ', class_top_div: 'form-group p-admin-staffform-kana', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf_1: 'form-control input-sm mr-2', class_textf_2: 'form-control input-sm mr-2', textf_size: 25)
+    = q.date_field_block(:start_date, '開始日', class_top_div: 'form-group p-admin-staffform-start', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 20)
+    = q.date_field_block(:end_date, '終了日', class_top_div: 'form-group p-admin-staffform-end', required: false, class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 20)
+    = q.check_boxes(:suspended, 'アカウント停止', class_top_div: 'form-group p-admin-staffform-suspended', class_before_checkbox: 'form-inline', class_checkbox: 'form-control input-sm mx-4')
