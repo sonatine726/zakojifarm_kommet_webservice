@@ -1,5 +1,5 @@
 module HtmlBuilder
-  def markup(tagname = nil, options ={})
+  def markup(tag_name = nil, options ={})
     root = Nokogiri::HTML::DocumentFragment.parse('')
     Nokogiri::HTML::Builder.with(root) do |doc|
       if tag_name
