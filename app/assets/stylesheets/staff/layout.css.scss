@@ -26,3 +26,17 @@ div.field_with_errors{
   label { color: $red; }
   input { background-color: $pink; }
 }
+
+div.error-message {
+  color: $red;
+  padding: 0 $very_wide;
+  :before{
+    content: '*';
+    padding-left: $narrow;
+  }
+}
+
+div.error-message:before {
+  content: '*';
+  padding-left: $narrow;
+}

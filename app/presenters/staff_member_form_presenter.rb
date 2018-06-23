@@ -12,6 +12,8 @@ class StaffMemberFormPresenter < FormPresenter
         m << text_field(name1, class: options[:class_textf_1], size: options[:textf_size])
         m << text_field(name2, class: options[:class_textf_2], size: options[:textf_size])
       end
+      m << error_messages_for(name1)
+      m << error_messages_for(name2)
     end
   end
 

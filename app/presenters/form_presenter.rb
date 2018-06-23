@@ -23,6 +23,7 @@ class FormPresenter
       m.div(class: options[:class_between_label_and_text]) do |m|
         m << text_field(name, class: options[:class_textf], size: options[:textf_size])
       end
+      m << error_messages_for(name)
     end
   end
 
@@ -32,6 +33,7 @@ class FormPresenter
       m.div(class: options[:class_between_label_and_password]) do |m|
         m << password_field(name, class: options[:class_passwordf], size: options[:passwordf_size])
       end
+      m << error_messages_for(name)
     end
   end
 
@@ -40,6 +42,17 @@ class FormPresenter
       m << decorated_label(name, label_text, options)
       m.div(class: options[:class_between_label_and_text]) do |m|
         m << text_field(name, class: options[:class_textf], size: options[:textf_size])
+      end
+      m << error_messages_for(name)
+    end
+  end
+
+  def error_messages_for(name)
+    markup do |m|
+      object.errors.full_messages_for(name).each do |message|
+        m.div(class: 'error-message') do |m|
+          m.text message
+        end
       end
     end
   end
