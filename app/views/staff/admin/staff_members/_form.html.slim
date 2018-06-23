@@ -1,37 +1,12 @@
+- p = StaffMemberFormPresenter.new(f, self)
 .text-right
-  small.notes
-    <span>*</span> 印の付いた項目は入力必須です。
+  = p.notes
 .py-3
-  .form-group.p-admin-staffform-email
-    = f.label :email, 'メールアドレス', class:"required mr-4"
-    .form-inline
-     = f.text_field :email, class:"form-control input-sm", size:"32", required: true
-  - if f.object.new_record?
-    .form-group.p-admin-staffform-password
-      = f.label :password, 'パスワード', class:"required mr-4"
-      .form-inline
-        = f.password_field :password, class:"form-control input-sm", size: "60"
-  .form-group.p-admin-staffform-name
-    = f.label :family_name, '氏名', class:"required mr-4"
-    .form-inline
-      = f.text_field :family_name, required:true, class:"form-control input-sm mr-2", size: "15"
-      = f.text_field :given_name, required:true, class:"form-control input-sm", size: "15"
-  .form-group.p-admin-staffform-kana
-    = f.label :family_name_kana, 'フリガナ', class:"required mr-4"
-    .form-inline
-      = f.text_field :family_name_kana, required:true, class:"form-control input-sm mr-2", size: "15"
-      = f.text_field :given_name_kana, required:true, class:"form-control input-sm", size: "15"
-  .form-group.p-admin-staffform-start
-    = f.label :start_date, '開始日', class:"required mr-4"
-    .form-inline
-      = f.text_field :start_date, required:true, class:"form-control input-sm", size: "20"
-  .form-group.p-admin-staffform-end
-    = f.label :end_date, '終了日', class:"mr-4"
-    .form-inline
-      = f.text_field :end_date, class:"form-control input-sm", size: "20"
-  .form-group.p-admin-staffform-suspended
-    .form-inline
-      = f.check_box :suspended, class:"form-control input-sm mx-4"
-      = f.label :suspended, 'アカウント停止'
-
-
+  - p.with_options(required: true) do |q|
+    = q.text_field_block(:email, 'メールアドレス', class_top_div: 'form-group p-admin-staffform-email', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 32)
+    = q.password_field_block(:password, 'パスワード', class_top_div: 'form-group p-admin-staffform-password', class_label: 'mr-4', class_between_label_and_password: 'form-inline', class_passwordf: 'form-control input-sm', textf_size: 60)
+    = q.full_name_block(:family_name, :given_name, '氏名', class_top_div: 'form-group p-admin-staffform-name', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf_1: 'form-control input-sm mr-2', class_textf_2: 'form-control input-sm mr-2', textf_size: 25)
+    = q.full_name_block(:family_name_kana, :given_name_kana, 'フリナガ', class_top_div: 'form-group p-admin-staffform-kana', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf_1: 'form-control input-sm mr-2', class_textf_2: 'form-control input-sm mr-2', textf_size: 25)
+    = q.date_field_block(:start_date, '開始日', class_top_div: 'form-group p-admin-staffform-start', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 20)
+    = q.date_field_block(:end_date, '終了日', class_top_div: 'form-group p-admin-staffform-end', required: false, class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 20)
+    = q.check_boxes(:suspended, 'アカウント停止', class_top_div: 'form-group p-admin-staffform-suspended', class_before_checkbox: 'form-inline', class_checkbox: 'form-control input-sm mx-4')

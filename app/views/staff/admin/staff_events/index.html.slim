@@ -11,7 +11,8 @@
         th 種別
         th 日時
       tbody
-        = render partial: 'event', collection: @events
+        - @events.each do |event|
+          = StaffEventPresenter.new(event, self).table_row
         - if @events.empty?
           tr
             = content_tag(:td, '記録がありません', colspan: @staff_member ? 2 : 3, stype: 'text-align: center')
