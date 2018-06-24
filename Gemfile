@@ -48,6 +48,7 @@ gem 'activeadmin'
 gem 'date_validator'
 gem 'email_validator'
 gem 'nokogiri'
+gem 'jquery-ui-rails'
 
 group :production do
   gem 'secure_headers'
