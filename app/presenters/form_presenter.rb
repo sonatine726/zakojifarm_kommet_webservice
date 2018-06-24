@@ -41,6 +41,12 @@ class FormPresenter
     markup(:div, class: options[:class_top_div]) do |m|
       m << decorated_label(name, label_text, options)
       m.div(class: options[:class_between_label_and_text]) do |m|
+        if options[:class_textf].kind_of?(String)
+          classes = options[:class_textf].strip.split + ['datepicker']
+          options[:class_textf] = classes.uniq.join(' ')
+        else
+          options[:class_textf] = 'datepicker'
+        end
         m << text_field(name, class: options[:class_textf], size: options[:textf_size])
       end
       m << error_messages_for(name)
