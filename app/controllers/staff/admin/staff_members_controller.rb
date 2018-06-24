@@ -64,6 +64,7 @@ class Staff::Admin::StaffMembersController < Staff::Admin::Base
 
   def update_params
     params.require(:staff_member).permit(:email, 
+                                         :password, 
                                          :family_name,
                                          :given_name, 
                                          :family_name_kana, 

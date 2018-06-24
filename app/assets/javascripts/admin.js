@@ -16,5 +16,4 @@
 //= require popper
 //= require bootstrap
 //= require_tree ./shared
-//= require_tree .
-
+//= require_tree ./admin

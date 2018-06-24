@@ -2,6 +2,16 @@ class StaffMemberFormPresenter < FormPresenter
   def password_field_block(name, label_text, **options)
     if object.new_record?
       super(name, label_text, options)
+    else
+      markup(:div, class: options[:class_top_div]) do |m|
+        m << decorated_label(name, label_text, options.merge(required: false))
+        m.div(class: options[:class_between_label_and_password]) do |m|
+          m << password_field(name, class: options[:class_passwordf], size: options[:passwordf_size], disabled: true)
+        end
+        m.button('変更する', type: 'button', id: 'enable-password-field', class: 'mt-3')
+        m.button('変更しない', type: 'button', id: 'disable-password-field', style: 'display: none', class: 'mt-3')
+        m << error_messages_for(name)
+      end
     end
   end
 

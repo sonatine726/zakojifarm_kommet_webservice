@@ -360,6 +360,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap (> 4.0.0.beta2.1)
   byebug
+  coffee-rails (~> 4.2)
   counter_culture
   database_cleaner
   date_validator
