@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180620022402) do
+ActiveRecord::Schema.define(version: 20180625004759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.string "type", null: false
+    t.string "postal_code", null: false
+    t.string "prefecture", null: false
+    t.string "city", null: false
+    t.string "address1", null: false
+    t.string "address2", null: false
+    t.string "company_name", default: "", null: false
+    t.string "division_name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_addresses_on_customer_id"
+    t.index ["type", "customer_id"], name: "index_addresses_on_type_and_customer_id", unique: true
+  end
 
   create_table "admin_members", force: :cascade do |t|
     t.string "email", null: false
@@ -30,6 +46,22 @@ ActiveRecord::Schema.define(version: 20180620022402) do
     t.datetime "updated_at", null: false
     t.index ["email_for_index"], name: "index_admin_members_on_email_for_index", unique: true
     t.index ["family_name_kana", "given_name_kana"], name: "index_admin_members_on_family_name_kana_and_given_name_kana"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "email_for_index", null: false
+    t.string "family_name", null: false
+    t.string "given_name", null: false
+    t.string "family_name_kana", null: false
+    t.string "given_name_kana", null: false
+    t.string "gender"
+    t.string "birthday"
+    t.string "hashed_password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_for_index"], name: "index_customers_on_email_for_index", unique: true
+    t.index ["family_name_kana", "given_name_kana"], name: "index_customers_on_family_name_kana_and_given_name_kana"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -63,23 +95,6 @@ ActiveRecord::Schema.define(version: 20180620022402) do
     t.datetime "updated_at", null: false
     t.index ["email_for_index"], name: "index_staff_members_on_email_for_index", unique: true
     t.index ["family_name_kana", "given_name_kana"], name: "index_staff_members_on_family_name_kana_and_given_name_kana"
-  end
-
-  create_table "test_articles", force: :cascade do |t|
-    t.text "title"
-    t.text "body"
-    t.integer "status"
-    t.datetime "published_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "test_comments", force: :cascade do |t|
-    t.integer "article_id"
-    t.string "author"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -116,5 +131,6 @@ ActiveRecord::Schema.define(version: 20180620022402) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "addresses", "customers"
   add_foreign_key "staff_events", "staff_members"
 end
