@@ -46,14 +46,23 @@ division_names = %w(manager engineer staff service)
         )
     puts "Create Customer (#{10*n+m})"
     pp c
+    ca = c.create_home_address!(
+      postal_code: sprintf('%07d', rand(10000000)),
+      prefecture: Address::PREFECTURE_NAMES.sample,
+      city: city_names.sample,
+      address1: '本郷',
+      address2: 'ライラック'
+    )
+    puts " Put home address"
+    pp ca
 
     if m % 3 == 0
-      wa = c.create_work_address(
+      wa = c.create_work_address!(
         postal_code: sprintf('%07d', rand(10000000)),
         prefecture: Address::PREFECTURE_NAMES.sample,
         city: city_names.sample,
-        address1: '本郷',
-        address2: 'ライラック',
+        address1: '岩間',
+        address2: 'アグリネーチャー',
         company_name: company_names.sample,
         division_name: division_names.sample
       )
