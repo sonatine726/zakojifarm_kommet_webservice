@@ -13,9 +13,9 @@ describe Staff::TopController, type: :controller do
     end
 
     describe '#index' do
-      it '通常はstaff/top/indexを表示' do
+      it '通常はstaff/top/dashboardを表示' do
         get :index
-        expect(response).to render_template('staff/top/index')
+        expect(response).to render_template('staff/top/dashboard')
       end
 
       it '停止フラグがセットされたら強制ログアウト' do
