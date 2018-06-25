@@ -1,5 +1,5 @@
 class CustomerFormPresenter < UserFormPresenter
-  def birthday_field_block(name, label_text, options = {})
+  def birthday_field_block(name, label_text, **options)
     markup(:div, class: options[:class_top_div]) do |m|
       m << decorated_label(name, label_text, options)
       m.div(class: options[:class_between_label_and_text]) do |m|
@@ -15,15 +15,15 @@ class CustomerFormPresenter < UserFormPresenter
     end
   end
 
-  def gender_field_block
+  def gender_field_block(**options)
     markup(:div, class: options[:class_top_div]) do |m|
-      m.div(class: options[:class_before_checkbox]) do |m|
+      m.div(class: options[:class_before_text]) do |m|
         m << decorated_label(:gender, '性別')
         m.div(class: options[:class_between_label_and_text]) do |m|
-          m.radio_button(:gender, 'male')
+          m << radio_button(:gender, 'male')
           m << label(:gender_male, '男性')
-          m.radio_button(:gender, 'femail')
-          m << label(:gender_femail, '女性')
+          m << radio_button(:gender, 'female')
+          m << label(:gender_female, '女性')
         end
       end
     end

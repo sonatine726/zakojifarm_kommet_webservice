@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include HtmlBuilder
   APP_NAME = '米っと'.freeze
 
   def page_title

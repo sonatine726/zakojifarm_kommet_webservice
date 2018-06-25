@@ -6,7 +6,7 @@
   background-color: $light_gray;
 }
 
-.p-staff-login-form{
+.p-staff-login-form, .p-customer-form{
   padding: $wide * 2;
   border-radius: $wide;
   border: solid 1px $dark_cyan;
