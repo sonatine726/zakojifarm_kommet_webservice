@@ -26,7 +26,8 @@ given_names = %w(
   亀子:カメコ:kameko
 )
 
-company_name = %w(OIAX ABC XYZ)
+company_names = %w(OIAX ABC XYZ)
+division_names = %w(manager engineer staff service)
 
 10.times do |n|
   10.times do |m|
@@ -52,7 +53,9 @@ company_name = %w(OIAX ABC XYZ)
         prefecture: Address::PREFECTURE_NAMES.sample,
         city: city_names.sample,
         address1: '本郷',
-        address2: 'ライラック'
+        address2: 'ライラック',
+        company_name: company_names.sample,
+        division_name: division_names.sample
       )
       puts " Put work address"
       pp wa

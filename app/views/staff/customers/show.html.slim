@@ -1,0 +1,92 @@
+.table_wrapper.row.py-5
+  table.table.table-striped.table-bordered.container.col-8
+    tr.row.mx-0
+      th colspan=2 style='border: none'
+        | 基本情報
+    - cp = CustomerPresenter.new(@customer, self)
+    tr.row.mx-0
+      th.col-3 氏名
+      td.col-9
+        = cp.full_name
+    tr.row.mx-0
+      th.col-3 フリガナ
+      td.col-9
+        = cp.full_name_kana
+    tr.row.mx-0
+      th.col-3 メールアドレス
+      td.col-9
+        = @customer.email
+    tr.row.mx-0
+      th.col-3 生年月日
+      td.col-9.password
+        = cp.birthday
+    tr.row.mx-0
+      th.col-3 性別
+      td.col-9.password
+        = cp.gender
+    tr.row.mx-0
+      th.col-3 登録日時
+      td.col-9
+        = cp.created_at
+    tr.row.mx-0
+      th.col-3 更新日時
+      td.col-9
+        = cp.updated_at
+    - if @customer.home_address
+      - ap = AddressPresenter.new(@customer.home_address, self)
+      tr.row.mx-0
+        th colspan=2 style='border: none'
+          | 自宅住所
+      tr.row.mx-0
+        th.col-3 郵便番号
+        td.col-9
+          = ap.postal_code
+      tr.row.mx-0
+        th.col-3 都道府県
+        td.col-9
+          = ap.prefecture
+      tr.row.mx-0
+        th.col-3 市区町村
+        td.col-9
+          = ap.city
+      tr.row.mx-0
+        th.col-3 町域、番地等
+        td.col-9
+          = ap.address1
+      tr.row.mx-0
+        th.col-3 建物名、部屋番号等
+        td.col-9
+          = ap.address2
+    - if @customer.work_address
+      - ap = AddressPresenter.new(@customer.work_address, self)
+      tr.row.mx-0
+        th colspan=2 style='border: none'
+          | 勤務先
+      tr.row.mx-0
+        th.col-3 会社名
+        td.col-9
+          = ap.company_name
+      tr.row.mx-0
+        th.col-3 部署名
+        td.col-9
+          = ap.division_name
+      tr.row.mx-0
+        th.col-3 郵便番号
+        td.col-9
+          = ap.postal_code
+      tr.row.mx-0
+        th.col-3 都道府県
+        td.col-9
+          = ap.prefecture
+      tr.row.mx-0
+        th.col-3 市区町村
+        td.col-9
+          = ap.city
+      tr.row.mx-0
+        th.col-3 町域、番地等
+        td.col-9
+          = ap.address1
+      tr.row.mx-0
+        th.col-3 建物名、部屋番号等
+        td.col-9
+          = ap.address2
