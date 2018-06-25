@@ -9,4 +9,14 @@ class Staff::CustomersController < Staff::Base
     @title = '[スタッフ] 顧客詳細情報'
     @customer = Customer.find(params[:id])
   end
+
+  def new
+    @title = '[スタッフ] 新規顧客登録'
+    @customer_form = Staff::CustomerForm.new
+  end
+
+  def edit
+    @title = '[スタッフ] 顧客情報編集'
+    @customer_form = Staff::CustomerForm.new(Customer.find(params[:id]))
+  end
 end

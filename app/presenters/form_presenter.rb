@@ -53,6 +53,15 @@ class FormPresenter
     end
   end
 
+  def drop_down_list_block(name, label_text, choices, options={})
+    markup(:div, class: options[:class_top_div]) do |m|
+      m << decorated_label(name, label_text, options)
+      m.div(class: options[:class_between_label_and_password]) do |m|
+        m << form_builder.select(name, choices, {include_blank: true }, options)
+      end
+      m << error_messages_for(name)
+    end
+
   def error_messages_for(name)
     markup do |m|
       object.errors.full_messages_for(name).each do |message|
