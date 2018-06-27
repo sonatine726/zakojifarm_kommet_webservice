@@ -3,7 +3,7 @@ require 'rails_helper'
 feature '職員による顧客管理' do
   include FeatureSpecHelper
   let(:staff_member){ create(:staff_member) }
-  let!(:customer){ create(:customer) }
+  let!(:customer){ create(:customer, :with_home_and_work_addresses) }
 
   before do
     switch_namespace(:staff)
