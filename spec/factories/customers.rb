@@ -28,10 +28,8 @@ FactoryBot.define do
     gender 'male'
 
     trait :with_home_and_work_addresses do
-      after(:create) do |customer|
-        customer.create_home_address(FactoryBot.attributes_for(:home_address))
-        customer.create_work_address(FactoryBot.attributes_for(:work_address))
-      end
+      association :home_address, strategy: :build
+      association :work_address, strategy: :build
     end
   end
 end
