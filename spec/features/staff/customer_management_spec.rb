@@ -45,4 +45,26 @@ feature '職員による顧客管理' do
     expect(page).to have_css(
       'div.field_with_errors input#form_home_address_postal_code')
   end
+
+  scenario '職員が顧客（基本情報のみ）を登録する' do
+    click_link '顧客管理'
+    first('div.links').click_link '新規登録'
+
+    fill_in 'メールアドレス', with: 'test@example.jp'
+    fill_in 'パスワード', with: 'pw'
+    fill_in 'form_customer_family_name', with: '試験'
+    fill_in 'form_customer_given_name', with: '花子'
+    fill_in 'form_customer_family_name_kana', with: 'シケン'
+    fill_in 'form_customer_given_name_kana', with: 'ハナコ'
+    fill_in '生年月日', with: '1970-01-01'
+    choose '女性'
+    click_button '登録'
+
+    new_customer = Customer.order(:id).last
+    expect(new_customer.email).to eq('test@example.jp')
+    expect(new_customer.birthday).to eq(Date.new(1970, 1, 1))
+    expect(new_customer.gender).to eq('female')
+    expect(new_customer.home_address).to be_nil
+    expect(new_customer.work_address).to be_nil
+  end
 end
