@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180625024655) do
+ActiveRecord::Schema.define(version: 20180627125649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,19 @@ ActiveRecord::Schema.define(version: 20180625024655) do
     t.index ["family_name_kana", "given_name_kana"], name: "index_customers_on_family_name_kana_and_given_name_kana"
   end
 
+  create_table "phones", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "address_id"
+    t.string "number", null: false
+    t.string "number_for_index", null: false
+    t.boolean "primary", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_phones_on_address_id"
+    t.index ["customer_id"], name: "index_phones_on_customer_id"
+    t.index ["number_for_index"], name: "index_phones_on_number_for_index"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer "user_id"
     t.text "body"
@@ -95,23 +108,6 @@ ActiveRecord::Schema.define(version: 20180625024655) do
     t.datetime "updated_at", null: false
     t.index ["email_for_index"], name: "index_staff_members_on_email_for_index", unique: true
     t.index ["family_name_kana", "given_name_kana"], name: "index_staff_members_on_family_name_kana_and_given_name_kana"
-  end
-
-  create_table "test_articles", force: :cascade do |t|
-    t.text "title"
-    t.text "body"
-    t.integer "status"
-    t.datetime "published_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "test_comments", force: :cascade do |t|
-    t.integer "article_id"
-    t.string "author"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -149,5 +145,7 @@ ActiveRecord::Schema.define(version: 20180625024655) do
   end
 
   add_foreign_key "addresses", "customers"
+  add_foreign_key "phones", "addresses"
+  add_foreign_key "phones", "customers"
   add_foreign_key "staff_events", "staff_members"
 end
