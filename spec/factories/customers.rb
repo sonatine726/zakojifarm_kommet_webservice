@@ -26,7 +26,10 @@ FactoryBot.define do
     password 'password'
     birthday Date.new(1970, 1, 1)
     gender 'male'
-    association :home_address, strategy: :build
-    association :work_address, strategy: :build
+
+    trait :with_home_and_work_addresses do
+      association :home_address, strategy: :build
+      association :work_address, strategy: :build
+    end
   end
 end
