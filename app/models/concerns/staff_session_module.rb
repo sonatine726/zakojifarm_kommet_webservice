@@ -1,8 +1,9 @@
 module StaffSessionModule
   extend ActiveSupport::Concern
 
-  include PersonalNameHolder
   include EmailHolder
+  include PersonalNameHolder
+  include PasswordHolder
 
   included do
     validates :start_date, presence: true, date: {
@@ -15,14 +16,6 @@ module StaffSessionModule
       before: ->(obj){ 1.year.from_now.to_date },
       allow_blank: true
     }
-  end
-
-  def password=(raw_password)
-    if raw_password.kind_of?(String)
-      self.hashed_password = BCrypt::Password.create(raw_password)
-    elsif raw_password.nil?
-      self.hashed_password = nil
-    end
   end
 
   def active?
