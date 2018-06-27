@@ -1,16 +1,10 @@
 module StaffSessionModule
   extend ActiveSupport::Concern
-  
+
   include PersonalNameHolder
+  include EmailHolder
 
   included do
-    before_validation do
-      self.email = normalize_as_email(email)
-      self.email_for_index = email.downcase if email
-    end
-
-    validates :email, presence: true, email: {allow_blank: true}
-    validates :email_for_index, uniqueness: {allow_blank: true}
     validates :start_date, presence: true, date: {
       after_or_equal_to: Date.new(2000, 1, 1),
       before: ->(obj){ 1.year.from_now.to_date },
@@ -21,13 +15,6 @@ module StaffSessionModule
       before: ->(obj){ 1.year.from_now.to_date },
       allow_blank: true
     }
-
-    after_validation do
-      if errors.include?(:email_for_index)
-        errors.add(:email, :taken)
-        errors.delete(:email_for_index)
-      end
-    end
   end
 
   def password=(raw_password)
