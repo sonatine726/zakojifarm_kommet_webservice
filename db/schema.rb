@@ -110,6 +110,23 @@ ActiveRecord::Schema.define(version: 20180627125649) do
     t.index ["family_name_kana", "given_name_kana"], name: "index_staff_members_on_family_name_kana_and_given_name_kana"
   end
 
+  create_table "test_articles", force: :cascade do |t|
+    t.text "title"
+    t.text "body"
+    t.integer "status"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "test_comments", force: :cascade do |t|
+    t.integer "article_id"
+    t.string "author"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

@@ -1,4 +1,4 @@
-= fields_for :phones, phone, index: index do |ff|
+= f.fields_for :phones, phone, index: index do |ff|
   = markup(:li) do |m|
     - m << "電話番号 (#{index+1})"
     - m << ff.text_field(:number, class: 'form-control')

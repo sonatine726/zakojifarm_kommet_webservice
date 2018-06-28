@@ -8,8 +8,8 @@
       - m << q.full_name_block(:family_name_kana, :given_name_kana, 'フリナガ', class_top_div: 'form-group p-staff-customerform-kana', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf_1: 'form-control input-sm mr-2', class_textf_2: 'form-control input-sm mr-2', textf_size: 25)
     - m << p.birthday_field_block(:birthday, '生年月日', class_top_div: 'form-group p-staff-customerform-birthday', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 20)
     - m << p.gender_field_block(class_top_div: 'form-group p-staff-customerform-gender', class_between_label_and_text: 'form-inline')
-    - m.div(class: 'form-group p-staff-customerform-phones') do
+    - m.div(class: 'form-group p-staff-customerform-phones') do |m|
       - m << p.decorated_label(:personal_phones, '電話番号')
-      - m.ol(style: 'list-style-type: decimal;margin: 1em 0;padding-left: 40px;') do
+      - m.ol(style: 'list-style-type: decimal;margin: 1em 0;padding-left: 40px;')  do |m|
         - p.object.personal_phones.each_with_index do |phone, index|
           - m << render('phone_fields', f: ff, phone: phone, index: index)
