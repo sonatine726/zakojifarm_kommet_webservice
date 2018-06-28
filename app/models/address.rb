@@ -20,6 +20,7 @@ class Address < ApplicationRecord
   include StringNomalizer
 
   belongs_to :customer
+  has_many :phones, -> { order(:id) }, inverse_of: :address, dependent: :destroy, autosave: true
 
   before_validation do
     self.postal_code = normalize_as_postal_code(postal_code)
