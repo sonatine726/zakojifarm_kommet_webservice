@@ -1,0 +1,6 @@
+= fields_for :phones, phone, index: index do |ff|
+  = markup(:li) do |m|
+    - m << "電話番号 (#{index+1})"
+    - m << ff.text_field(:number, class: 'form-control')
+    - m << ff.check_box(:primary)
+    - m << ff.label(:primary, '優先', class: 'small my-2', style:'width:5%;line-height:1;')
