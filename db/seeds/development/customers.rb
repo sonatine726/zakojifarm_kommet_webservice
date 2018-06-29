@@ -34,7 +34,7 @@ division_names = %w(manager engineer staff service)
     fn = family_names[n].split(':')
     gn = given_names[m].split(':')
 
-    c = Customer.create!(
+    c = Customer.new(
           email: "#{fn[2]}.#{gn[2]}@example.jp",
           family_name: fn[0],
           given_name: gn[0],
@@ -44,9 +44,18 @@ division_names = %w(manager engineer staff service)
           birthday: 60.years.ago.advance(seconds: rand(40.years)).to_date,
           gender: m < 5 ? 'male' : 'female'
         )
-    puts "Create Customer (#{10*n+m})"
+
+    puts "Build Customer (#{10*n+m})"
     pp c
-    ca = c.create_home_address!(
+
+    if m % 2 == 0
+      cp = c.personal_phones.build(number: sprintf('090-0000-%04d', n * 10 + m))
+      puts "Build Personal phone"
+      pp cp
+    end
+
+    c.build_home_address
+    ca = c.home_address.assign_attributes(
       postal_code: sprintf('%07d', rand(10000000)),
       prefecture: Address::PREFECTURE_NAMES.sample,
       city: city_names.sample,
@@ -56,8 +65,15 @@ division_names = %w(manager engineer staff service)
     puts " Put home address"
     pp ca
 
+    if m % 10 == 0
+      ap = c.home_address.phones.build(number: sprintf('03-0000-%04d', n))
+      puts "Build home address phone"
+      pp cp
+    end
+
     if m % 3 == 0
-      wa = c.create_work_address!(
+      c.build_work_address
+      wa = c.work_address.assign_attributes(
         postal_code: sprintf('%07d', rand(10000000)),
         prefecture: Address::PREFECTURE_NAMES.sample,
         city: city_names.sample,
@@ -69,5 +85,7 @@ division_names = %w(manager engineer staff service)
       puts " Put work address"
       pp wa
     end
+
+    c.save!
   end
 end
