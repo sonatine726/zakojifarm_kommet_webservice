@@ -1,10 +1,7 @@
 class Staff::SessionsController < Staff::Base
-  skip_before_action :check_staff_login, only: [:new, :create]
-
-  include SessionControllerModule
-
   private
-  def hook_create_susupended(target_member)
+
+  def hook_create_suspended(target_member)
     target_member.events.create!(type: :rejected)
   end
 

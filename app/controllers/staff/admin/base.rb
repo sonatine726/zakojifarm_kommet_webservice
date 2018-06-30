@@ -1,14 +1,13 @@
 class Staff::Admin::Base < ApplicationController
+  include SessionControllerModule
+  
   layout 'staff/admin'
 
   skip_before_action :authenticate_user!
-  before_action :check_admin_login
-  
-  include SessionValidityModule
 
   protected
-  def current_member
-    current_admin_member
+  def virtual_current_member(id)
+    current_admin_member(id)
   end
 
   def root_url
@@ -36,16 +35,11 @@ class Staff::Admin::Base < ApplicationController
   end
 
   private
-  def current_admin_member
-    if session[:admin_member_id]
-      @current_admin_member ||= AdminMember.find_by(id: session[:admin_member_id])
-    end
-  end
-
-  def check_admin_login
-    unless current_admin_member
-      flash.alert = '管理者としてログインしてください。'
-      redirect_to :admin_login
+  def current_admin_member(id = nil)
+    if id
+      @current_admin_member ||= AdminMember.find_by(id: id)
+    else
+      @current_admin_member
     end
   end
 
