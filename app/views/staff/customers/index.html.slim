@@ -2,6 +2,8 @@
   .links.text-right
     = link_to '新規登録', :new_staff_customer
 
+  == render 'search_form'
+
   = paginate @customers
   table.table.table-striped.table-bordered.table-hover.p-staff-tbl
     thead

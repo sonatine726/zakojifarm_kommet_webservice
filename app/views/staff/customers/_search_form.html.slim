@@ -1,0 +1,14 @@
+= form_for @search_form, as: 'search', url: :staff_customers, html: {method: :get, class: 'search my-4 p-staff-search-form p-customer-form'} do |f|
+  - markup do |m|
+    - p = FormPresenter.new(f, self)
+    - m << p.text_field_block(:family_name_kana, 'フリガナ（姓）:', class_top_div: 'form-group p-staff-search-form__family_name form-inline', class_label: 'mr-4', class_textf: 'form-control input-sm', textf_size: 20)
+    - m << p.text_field_block(:given_name_kana, 'フリガナ（名）:', class_top_div: 'form-group p-staff-search-form__given_name form-inline', class_label: 'mr-4', class_textf: 'form-control input-sm', textf_size: 20)
+    - m << p.drop_down_list_block(:birth_year, '誕生年 :', (1900..Time.current.year).to_a.reverse, class_top_div: 'form-group p-staff-search-form__birth_year form-inline', class_label: 'mr-4', class_textf: 'form-control input-sm')
+    - m << p.drop_down_list_block(:birth_month, '誕生月 :', 1..12, class_top_div: 'form-group p-staff-search-form__birth_month form-inline', class_label: 'mr-4', class_textf: 'form-control input-sm')
+    - m << p.drop_down_list_block(:birth_month, '誕生日 :', 1..31, class_top_div: 'form-group p-staff-search-form__birth_mday form-inline', class_label: 'mr-4',class_textf: 'form-control input-sm')
+    - m.div
+      - m << p.drop_down_list_block(:address_type, '住所の検索範囲 :', [[ '自宅住所のみ', 'home' ], [ '勤務先のみ', 'work' ]], class_top_div: 'form-group p-staff-search-form__address_target form-inline', class_label: 'mr-4', class_textf: 'form-control input-sm')
+    - m << p.drop_down_list_block(:prefecture, '都道府県', Address::PREFECTURE_NAMES, class_top_div: 'form-group p-staff-search-form__prefecture form-inline', class_label: 'mr-4', class_textf: 'form-control input-sm')
+    - m << p.text_field_block(:phone_number, '電話番号 :', class_top_div: 'form-group p-staff-search-form__phone form-inline', class_label: 'mr-4', class_textf: 'form-control input-sm', textf_size: 20)
+    - m.div(class: 'text-center')
+      - m << f.submit('検索')
