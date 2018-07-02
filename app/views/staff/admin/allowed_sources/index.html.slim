@@ -1,0 +1,12 @@
+.table-responsive.py-3
+  table.table-condensed.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th IPアドレス
+        th 作成日時
+      tbody
+        - @allowed_sources.each do |s|
+          - p = AllowedSourcePresenter.new(s, self)
+          tr
+            td.ip = p.ip_address
+            td.date = p.created_at

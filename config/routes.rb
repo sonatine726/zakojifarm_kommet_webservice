@@ -26,6 +26,9 @@ Rails.application.routes.draw do
         resources :staff_events, only: [ :index ]
       end
       resources :staff_events, only: [ :index ]
+      resources :allowed_sources, only: [ :index, :create ] do
+        delete :delele, on: :collection
+      end
     end
   end
 
