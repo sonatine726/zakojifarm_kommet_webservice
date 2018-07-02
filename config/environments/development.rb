@@ -83,6 +83,7 @@ Rails.application.configure do
   config.kommet = {
     staff: {host: 'kommet.com', path: 'staff'},
     admin: {host: 'kommet.com', path: 'admin'},
-    customer: {host: 'kommet.com', path: 'mypage'}
+    customer: {host: 'kommet.com', path: 'mypage'},
+    restrict_ip_addresses: true
   }
 end
