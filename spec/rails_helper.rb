@@ -76,4 +76,8 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  config.after do
+    Rails.application.config.kommet[:restrict_ip_addresses] = false
+  end
 end
