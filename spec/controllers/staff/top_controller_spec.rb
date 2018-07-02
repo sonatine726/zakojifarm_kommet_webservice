@@ -1,8 +1,29 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe Staff::TopController, type: :controller do
+RSpec.describe Staff::TopController, type: :controller do
   context 'ログイン前' do
     it_behaves_like 'a protected staff controller'
+
+    describe 'IPアドレスによるアクセス制限' do
+      let(:staff_member){create(:staff_member)}
+      before do
+        Rails.application.config.kommet[:restrict_ip_addresses] = true
+        session[:staff_member_id] = staff_member.id
+        session[:staff_last_access_time] = 1.second.ago
+      end
+
+      it '許可' do
+        AllowedSource.create!(namespace: 'staff', ip_address: '0.0.0.0')
+        get :index
+        expect(response).to render_template('staff/top/dashboard')
+      end
+
+      it '拒否' do
+        AllowedSource.create!(namespace: 'staff', ip_address: '192.168.0.*')
+        get :index
+        expect(response).to render_template('errors/forbidden_error')
+      end
+    end
   end
 
   context 'ログイン後' do
