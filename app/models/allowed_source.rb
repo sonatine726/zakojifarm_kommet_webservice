@@ -19,14 +19,18 @@ class AllowedSource < ApplicationRecord
 
   class << self
     def include?(namespace, ip_address)
-      return true if !Rails.application.config.kommet[:restrict_ip_addresses]
+      !Rails.application.config.kommet[:restrict_ip_addresses] ||
+        where(namespace: namespace).where(options_for(ip_address)).exists?
+    end
 
+    private
+
+    def options_for(ip_address)
       octets = ip_address.split('.')
       condition = %Q{
         octet1 = ? AND octet2 = ? AND octet3 = ? AND ((octet4 = ? AND wildcard = ?) OR wildcard = ?)
       }.gsub(/\s+/, ' ').strip
       opts = [condition, *octets, false, true ]
-      where(namespace: namespace).where(opts).exists?
     end
   end
 end
