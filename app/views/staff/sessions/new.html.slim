@@ -6,6 +6,10 @@
   .form-group.p-staff-form-password
     = f.label :password, 'パスワード'
     .form-inline
-      = f.password_field :password, class:"form-control input-sm", size: "65"
+      = f.password_field :password, class:"form-control input-sm", size: "40"
+  .form-group.p-staff-form-rememberme
+    .form-inline
+      = f.check_box :remember_me, class:"form-control input-sm"
+      = f.label :remember_me, '次回から自動でログインする', class:'ml-3'
   .p-staff-form-submit
     = f.submit 'ログイン', class:"btn btn-default"

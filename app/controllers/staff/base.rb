@@ -1,14 +1,13 @@
 class Staff::Base < ApplicationController
+  include SessionControllerModule
+  
   layout 'staff/staff'
 
   skip_before_action :authenticate_user!
-  before_action :check_staff_login
-
-  include SessionValidityModule
 
   protected
-  def current_member
-    current_staff_member
+  def virtual_current_member(id)
+    current_staff_member(id)
   end
 
   def root_url
@@ -36,16 +35,11 @@ class Staff::Base < ApplicationController
   end
 
   private
-  def current_staff_member
-    if session[:staff_member_id]
-      @current_staff_member ||= StaffMember.find_by(id: session[:staff_member_id])
-    end
-  end
-
-  def check_staff_login
-    unless current_staff_member
-      flash.alert = 'スタッフとしてログインしてください。'
-      redirect_to :staff_login
+  def current_staff_member(id = nil)
+    if id
+      @current_staff_member ||= StaffMember.find_by(id: id)
+    else
+      @current_staff_member
     end
   end
 
