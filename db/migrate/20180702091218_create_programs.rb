@@ -1,7 +1,7 @@
 class CreatePrograms < ActiveRecord::Migration[5.1]
   def change
     create_table :programs do |t|
-      t.references :staff_members, column: :registrant_id, foreign_key: true, null: false
+      t.references :registrant, foreign_key: { to_table: :staff_members}, null: false
       t.string :title, null: false
       t.text :description
       t.datetime :application_start_time, null: false, index: true

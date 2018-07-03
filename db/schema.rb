@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20180702091243) do
   end
 
   create_table "programs", force: :cascade do |t|
-    t.bigint "staff_members_id", null: false
+    t.bigint "registrant_id", null: false
     t.string "title", null: false
     t.text "description"
     t.datetime "application_start_time", null: false
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20180702091243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["application_start_time"], name: "index_programs_on_application_start_time"
-    t.index ["staff_members_id"], name: "index_programs_on_staff_members_id"
+    t.index ["registrant_id"], name: "index_programs_on_registrant_id"
   end
 
   create_table "staff_events", force: :cascade do |t|
@@ -202,6 +202,6 @@ ActiveRecord::Schema.define(version: 20180702091243) do
   add_foreign_key "entries", "programs"
   add_foreign_key "phones", "addresses"
   add_foreign_key "phones", "customers"
-  add_foreign_key "programs", "staff_members", column: "staff_members_id"
+  add_foreign_key "programs", "staff_members", column: "registrant_id"
   add_foreign_key "staff_events", "staff_members"
 end
