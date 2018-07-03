@@ -14,6 +14,9 @@
 #  hashed_password  :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  birth_year       :integer
+#  birth_month      :integer
+#  birth_mday       :integer
 #
 
 class Customer < ApplicationRecord
