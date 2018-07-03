@@ -21,4 +21,9 @@ class StaffMember < ApplicationRecord
   include StaffSessionModule
 
   has_many :events, class_name: 'StaffEvent', dependent: :destroy
+  has_many :programs, foreign_key: 'registrant_id', dependent: :restrict_with_exception
+
+  def deletable?
+    programs.empty?
+  end
 end
