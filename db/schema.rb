@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630030009) do
+ActiveRecord::Schema.define(version: 20180702071907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 20180630030009) do
     t.datetime "updated_at", null: false
     t.index ["email_for_index"], name: "index_admin_members_on_email_for_index", unique: true
     t.index ["family_name_kana", "given_name_kana"], name: "index_admin_members_on_family_name_kana_and_given_name_kana"
+  end
+
+  create_table "allowed_sources", force: :cascade do |t|
+    t.string "namespace", null: false
+    t.integer "octet1", null: false
+    t.integer "octet2", null: false
+    t.integer "octet3", null: false
+    t.integer "octet4", null: false
+    t.boolean "wildcard", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["namespace", "octet1", "octet2", "octet3", "octet4"], name: "index_allowed_sources_on_namespace_and_octets", unique: true
   end
 
   create_table "customers", force: :cascade do |t|
@@ -124,6 +136,23 @@ ActiveRecord::Schema.define(version: 20180630030009) do
     t.datetime "updated_at", null: false
     t.index ["email_for_index"], name: "index_staff_members_on_email_for_index", unique: true
     t.index ["family_name_kana", "given_name_kana"], name: "index_staff_members_on_family_name_kana_and_given_name_kana"
+  end
+
+  create_table "test_articles", force: :cascade do |t|
+    t.text "title"
+    t.text "body"
+    t.integer "status"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "test_comments", force: :cascade do |t|
+    t.integer "article_id"
+    t.string "author"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

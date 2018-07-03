@@ -53,9 +53,11 @@ class Staff::CustomersController < Staff::Base
 
   private
   def search_params
-    params.require(:search).permit(
-      :family_name_kana, :given_name_kana, :birth_year, :birth_month, :birth_mday,
-      :address_type, :prefecture, :city, :phone_number
-    )
+    if params[:search]
+      params.require(:search).permit(
+        :family_name_kana, :given_name_kana, :birth_year, :birth_month, :birth_mday,
+        :address_type, :prefecture, :city, :phone_number
+      )
+    end
   end
 end

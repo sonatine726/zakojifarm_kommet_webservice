@@ -18,14 +18,13 @@ module SessionValidityModule
   end
 
   def check_timeout
-    if current_member
-      if session[last_access_time_id] >= TIMEOUT.ago
-        session[last_access_time_id] = Time.current
-      else
+    if current_member && session[last_access_time_id]
+      if session[last_access_time_id] < TIMEOUT.ago
         session.delete(session_id)
         flash.alert = 'セッションがタイムアウトしました。'
-        redirect_to login_url
+        redirect_to login_url and return
       end
     end
+    session[last_access_time_id] = Time.current
   end
 end
