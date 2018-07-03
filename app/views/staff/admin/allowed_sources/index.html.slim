@@ -1,14 +1,22 @@
 .table-responsive.py-3
   == render 'new_allowed_source'
 
-  table.table-condensed.table-striped.table-bordered.table-hover
-    thead
-      tr
-        th IPアドレス
-        th 作成日時
-      tbody
-        - @allowed_sources.each do |s|
-          - p = AllowedSourcePresenter.new(s, self)
-          tr
-            td.ip = p.ip_address
-            td.date = p.created_at
+  = form_for :form, url: :delete_admin_allowed_sources, method: :delete do |f|
+    table.table-condensed.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th 削除
+          th IPアドレス
+          th 作成日時
+        tbody
+          - @allowed_sources.each_with_index do |s, index|
+            - p = AllowedSourcePresenter.new(s, self)
+            = f.fields_for :allowed_sources, s, index:index do |ff|
+              = ff.hidden_field :id
+              tr
+                td.actions.text-center = ff.check_box :_destroy
+                td.ip = p.ip_address
+                td.date = p.created_at
+    .p-allowedip-form__submit
+      = f.submit('チェックしたIPアドレスを削除', class:"btn btn-default mx-2", 
+        data: {confirmed: '本当に削除しますか？'})
