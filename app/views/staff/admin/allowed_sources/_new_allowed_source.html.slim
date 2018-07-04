@@ -1,0 +1,10 @@
+= form_for [ :admin, @new_allowed_source ], html:{class:"my-4 p-allowedip-form"} do |f|
+  .form-group.p-allowedip-form__ip
+    = f.label(:octet1, '新規許可IPアドレス')
+    .form-inline
+      = f.text_field(:octet1,size: 3, class:"form-control input-sm mx-1")
+      = f.text_field(:octet2,size: 3, class:"form-control input-sm mx-1")
+      = f.text_field(:octet3,size: 3, class:"form-control input-sm mx-1")
+      = f.text_field(:last_octet,size: 3, class:"form-control input-sm mx-1")
+      .p-allowedip-form__submit
+        = f.submit('追加', class:"btn btn-default mx-2")

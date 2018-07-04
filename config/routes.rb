@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resource :account, only: [ :show, :edit, :update ]
       resource :password, only: [ :show, :edit, :update ]
       resources :customers
+      resources :programs
     end
   end
 
@@ -26,6 +27,9 @@ Rails.application.routes.draw do
         resources :staff_events, only: [ :index ]
       end
       resources :staff_events, only: [ :index ]
+      resources :allowed_sources, only: [ :index, :create ] do
+        delete :delete, on: :collection
+      end
     end
   end
 

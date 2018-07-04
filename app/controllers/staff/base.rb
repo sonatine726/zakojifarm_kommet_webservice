@@ -4,6 +4,7 @@ class Staff::Base < ApplicationController
   layout 'staff/staff'
 
   skip_before_action :authenticate_user!
+  before_action :check_source_ip_address
 
   protected
   def virtual_current_member(id)
@@ -44,4 +45,8 @@ class Staff::Base < ApplicationController
   end
 
   helper_method :current_staff_member
+
+  def check_source_ip_address
+    raise IpAddressRejectedError unless AllowedSource.include?('staff', request.ip)
+  end 
 end

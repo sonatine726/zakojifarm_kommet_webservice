@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180630030009) do
+ActiveRecord::Schema.define(version: 20180702091243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,18 @@ ActiveRecord::Schema.define(version: 20180630030009) do
     t.index ["family_name_kana", "given_name_kana"], name: "index_admin_members_on_family_name_kana_and_given_name_kana"
   end
 
+  create_table "allowed_sources", force: :cascade do |t|
+    t.string "namespace", null: false
+    t.integer "octet1", null: false
+    t.integer "octet2", null: false
+    t.integer "octet3", null: false
+    t.integer "octet4", null: false
+    t.boolean "wildcard", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["namespace", "octet1", "octet2", "octet3", "octet4"], name: "index_allowed_sources_on_namespace_and_octets", unique: true
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "email", null: false
     t.string "email_for_index", null: false
@@ -80,6 +92,17 @@ ActiveRecord::Schema.define(version: 20180630030009) do
     t.index ["given_name_kana"], name: "index_customers_on_given_name_kana"
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.bigint "program_id", null: false
+    t.bigint "customer_id", null: false
+    t.boolean "approved", default: false, null: false
+    t.boolean "canceled", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_entries_on_customer_id"
+    t.index ["program_id", "customer_id"], name: "index_entries_on_program_id_and_customer_id", unique: true
+  end
+
   create_table "phones", force: :cascade do |t|
     t.bigint "customer_id", null: false
     t.bigint "address_id"
@@ -98,6 +121,20 @@ ActiveRecord::Schema.define(version: 20180630030009) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.bigint "registrant_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.datetime "application_start_time", null: false
+    t.datetime "application_end_time", null: false
+    t.integer "min_number_of_participants"
+    t.integer "max_number_of_participants"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_start_time"], name: "index_programs_on_application_start_time"
+    t.index ["registrant_id"], name: "index_programs_on_registrant_id"
   end
 
   create_table "staff_events", force: :cascade do |t|
@@ -178,7 +215,10 @@ ActiveRecord::Schema.define(version: 20180630030009) do
   end
 
   add_foreign_key "addresses", "customers"
+  add_foreign_key "entries", "customers"
+  add_foreign_key "entries", "programs"
   add_foreign_key "phones", "addresses"
   add_foreign_key "phones", "customers"
+  add_foreign_key "programs", "staff_members", column: "registrant_id"
   add_foreign_key "staff_events", "staff_members"
 end
