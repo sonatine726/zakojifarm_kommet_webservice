@@ -40,4 +40,5 @@ class Staff::ProgramForm
       :application_end_date, :application_end_hour, :application_end_minute,
       :min_number_of_participants, :max_number_of_participants
     )
+  end
 end
