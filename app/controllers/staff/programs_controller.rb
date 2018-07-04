@@ -8,4 +8,14 @@ class Staff::ProgramsController < Staff::Base
     @title = 'プログラム詳細情報'
     @program = Program.listing.find(params[:id])
   end
+
+  def new
+    @title = 'プログラムの新規登録'
+    @program_form = Staff::ProgramForm.new
+  end
+
+  def edit
+    @title = 'プログラムの情報更新'
+    @program_form = Staff::ProgramForm.new(Program.find(params[:id]))
+  end
 end

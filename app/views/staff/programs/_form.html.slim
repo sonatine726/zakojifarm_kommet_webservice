@@ -1,0 +1,13 @@
+.mx-auto
+  = f.fields_for :program, f.object.program do |ff|
+    = markup do |m|
+      - p = ProgramFormPresenter.new(ff, self)
+      - m << p.notes
+      - p.with_options(required: true) do |q|
+        = q.text_field_block(:title, 'タイトル', class_top_div: 'form-group', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', maxlength: 32)
+        = q.datetime_field_block(:application_start, '申し込み開始日時', class_top_div: 'form-group', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 10, instruction: '(現在から一年後まで)')
+        = q.datetime_field_block(:application_end, '申し込み終了開始日時', class_top_div: 'form-group', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 10, instruction: '(開始日時から90日後まで)')
+      - p.with_options(size: 6) do |q|
+        - m << q.number_field_block(:min_number_of_participants, '最小参加者数', class_top_div: 'form-group', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', max: 1000)
+        - m << q.number_field_block(:max_number_of_participants, '最大参加者数', class_top_div: 'form-group', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', max: 1000)
+      - m << p.description
