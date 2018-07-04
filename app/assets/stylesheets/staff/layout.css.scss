@@ -40,3 +40,8 @@ div.error-message:before {
   content: '*';
   padding-left: $narrow;
 }
+
+.instruction{
+  margin-left: 1rem;
+  font-size: 0.8rem;
+}

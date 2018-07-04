@@ -1,0 +1,5 @@
+= form_for @program_form, as: 'form', url: [ :staff, @program_form.program ], html:{ class:"my-4 p-customer-form" } do |f|
+  == render 'form', f:f
+  .buttons.text-center
+    = f.submit '更新', class:"btn btn-lg btn-primary"
+    = link_to 'キャンセル', :staff_programs
