@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'プログラム管理機能', :performance do
-  include FeaturesSpecHelper
+  include FeatureSpecHelper
   include PerformanceSpecHelper
   let(:staff_member) { create(:staff_member) }
 
@@ -20,7 +20,8 @@ feature 'プログラム管理機能', :performance do
 
   scenario 'プログラム一覧' do |example|
     visit staff_programs_path
-    expect(page).to have_css('h1', text: 'プログラム管理')
+    expect(page).to have_css('section', text: 'プログラム管理')
+    # puts page.body
 
     elapsed = Benchmark.realtime do
       100.times do
