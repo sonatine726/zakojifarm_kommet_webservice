@@ -8,7 +8,7 @@ class Customer::Base < ApplicationController
   protected
 
   def virtual_current_member(id)
-    current_customer_member(id)
+    current_customer(id)
   end
 
   def root_url
@@ -45,13 +45,13 @@ class Customer::Base < ApplicationController
 
   private
 
-  def current_customer_member(id = nil)
+  def current_customer(id = nil)
     if id
-      @current_customer_member ||= Customer.find_by(id: id)
+      @current_customer ||= Customer.find_by(id: id)
     else
-      @current_customer_member
+      @current_customer
     end
   end
 
-  helper_method :current_customer_member
+  helper_method :current_customer
 end
