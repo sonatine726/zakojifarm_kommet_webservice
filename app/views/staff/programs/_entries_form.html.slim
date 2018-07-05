@@ -1,0 +1,28 @@
+- entries = @program.entries.includes(:customer).order('entries.id').to_a
+- cols = 4
+- rows = entries.size / cols
+- rows += 1 unless entries.size % cols == 0
+
+table.table-condensed.table-striped.table-bordered.table-hover.p-program-entries
+  tr
+    - cols.times do
+      th 
+      th 氏名
+      th A
+      th C
+  - rows.times do |i|
+    tr
+      - cols.times do |j|
+        - index = i * cols + j
+        - e = entries[index] || break
+        = markup(:div, class: 'entry') do |m|
+          - m.th index + 1
+          - m.td e.customer.family_name + ' ' + e.customer.given_name
+          - m.td do
+            - attributes = { type: 'checkbox' }
+            - attributes[:checked] = 'checked' if e.approved?
+            - m.input attributes
+          - m.td do
+            - attributes = { type: 'checkbox' }
+            - attributes[:checked] = 'checked' if e.canceled?
+            - m.input attributes
