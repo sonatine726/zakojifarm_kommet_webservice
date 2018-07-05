@@ -40,3 +40,8 @@ form{
     @extend .btn-primary;
   }
 }
+
+div.with-errors{
+  label { color: $red; }
+  input, select { background-color: $pink;}
+}

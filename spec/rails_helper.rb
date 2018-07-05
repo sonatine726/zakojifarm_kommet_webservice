@@ -77,7 +77,15 @@ RSpec.configure do |config|
     end
   end
 
+  # Others
   config.after do
     Rails.application.config.kommet[:restrict_ip_addresses] = false
+  end
+
+  config.filter_run_excluding performance: true
+  config.before(performance: true) do
+    ActionController::Base.perform_caching = true
+    ActiveSupport::Dependencies.mechanism = :require
+    Rails.logger.level = ActiveSupport::Logger::INFO
   end
 end

@@ -14,6 +14,9 @@
 #  hashed_password  :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  birth_year       :integer
+#  birth_month      :integer
+#  birth_mday       :integer
 #
 
 class Customer < ApplicationRecord
@@ -27,6 +30,8 @@ class Customer < ApplicationRecord
   has_many :phones, dependent: :destroy
   has_many :personal_phones, -> { where(address_id: nil).order(:id) },
     class_name: 'Phone', inverse_of: :customer, autosave: true
+  has_many :entries, dependent: :destroy
+  has_many :programs, through: :entries
 
   validates :gender,inclusion: { in: %w(male female), allow_blank: true }
   validates :birthday, date: {
