@@ -40,6 +40,14 @@ class Customer < ApplicationRecord
     allow_blank: true
   }
 
+  def active?
+    true
+  end
+
+  def suspended?
+    false
+  end
+
   before_save do
     if birthday
       self.birth_year = birthday.year

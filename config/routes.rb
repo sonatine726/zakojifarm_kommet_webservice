@@ -6,6 +6,14 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :posts, only: [:create]
 
+  constraints host: config[:customer][:host] do
+    namespace :customer , path: config[:customer][:path] do
+      root 'top#index'
+      get 'login' => 'sessions#new', as: :login
+      resource :session, only: [ :create, :destroy ]
+    end
+  end
+
   constraints host: config[:staff][:host] do
     namespace :staff , path: config[:staff][:path] do
       root 'top#index'
