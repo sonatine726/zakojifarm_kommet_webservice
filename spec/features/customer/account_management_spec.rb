@@ -18,7 +18,6 @@ feature '顧客によるアカウント管理' do
       fill_in '郵便番号', with: '9999999'
     end
     click_button '確認画面に進む'
-    binding.pry
     click_button '訂正'
 
     check "form_inputs_work_address"
