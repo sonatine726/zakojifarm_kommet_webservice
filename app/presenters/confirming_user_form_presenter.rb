@@ -3,8 +3,8 @@ class ConfirmingUserFormPresenter < ConfirmingFormPresenter
     markup(:div, class: options[:class_top_div]) do |m|
       m << decorated_label(name1, label_text, options)
       m.div(object.send(name1) + ' ' + object.send(name2), class: 'field-value')
-      m.hidden_field(name1)
-      m.hidden_field(name2)
+      m << hidden_field(name1)
+      m << hidden_field(name2)
     end
   end
 end

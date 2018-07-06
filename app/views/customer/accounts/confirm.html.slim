@@ -1,5 +1,6 @@
-= form_for @customer_form, as: 'form', html:{class:"my-4 p-customer-form"}, url: :customer_account do |f|
-  == render 'confirming_form', f:f
-  .buttons.text-center
-    = f.submit '更新', class: "btn btn-lg btn-primary"
-    = f.submit '訂正', name: 'correct', class: "btn btn-lg btn-primary"
+.confirming
+  = form_for @customer_form, as: 'form', html:{class:"my-4 p-customer-form"}, url: :customer_account do |f|
+    == render 'confirming_form', f:f
+    .buttons.text-center
+      = f.submit '更新', class: "btn btn-lg btn-primary"
+      = f.submit '訂正', name: 'correct', class: "btn btn-lg btn-primary"

@@ -1,4 +1,4 @@
-class ConfirmingCustomerFormPresenter < ConfirmingFormPresenter
+class ConfirmingCustomerFormPresenter < ConfirmingUserFormPresenter
   def birthday_field_block(name, label_text, **options)
     markup(:div, class: options[:class_top_div]) do |m|
       m << decorated_label(name, label_text, options)
