@@ -36,6 +36,9 @@ Rails.application.routes.draw do
       resources :programs do
         patch :entries, on: :member
       end
+      resources :messages, only: [] do
+        get :count, on: :collection
+      end
     end
   end
 

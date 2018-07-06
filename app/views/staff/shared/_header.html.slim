@@ -6,6 +6,8 @@ nav.navbar.bg-dark.navbar-dark
         = link_to "ログアウト", :staff_session, method: :delete, class: "nav-link text-secondary"
       li.nav-item
         = link_to "アカウント", :staff_account, class: "nav-link text-secondary"
+      li.nav-item
+        = number_of_unprocessed_messages
     - else
       li.nav-item
         = link_to_unless_current "ログイン", :staff_login, class: "nav-link text-secondary"

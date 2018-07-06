@@ -4,7 +4,7 @@ class Customer::MessagesController < Customer::Base
     @message = CustomerMessage.new
   end
 
-  #Post
+  #POST
   def confirm
     @title = '新規問い合わせ(確認)'
     @message = CustomerMessage.new(customer_message_params)
