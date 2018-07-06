@@ -1,6 +1,6 @@
 = f.fields_for :home_address, f.object.customer.home_address do |ff|
   = markup do |m|
-    - p = AddressFormPresenter.new(ff, self)
+    - p = confirming ? ConfirmingAddressFormPresenter.new(ff, self) : AddressFormPresenter.new(ff, self)
     - p.with_options(required: true) do |q|
       - m << q.postal_code_block(:postal_code, '郵便番号', class_top_div: 'form-group p-staff-customerform-postalcode', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 32)
       - m << q.drop_down_list_block(:prefecture, '都道府県', Address::PREFECTURE_NAMES, class_top_div: 'form-group p-staff-customerform-postalcode', class_label: 'mr-4', class_between_label_and_select: 'form-inline', class_textf: 'form-control input-sm')
@@ -11,4 +11,7 @@
       - m << p.decorated_label(:home_address_phones, '電話番号')
       - m.ol(style: 'list-style-type: decimal;margin: 1em 0;padding-left: 40px;')  do |m|
         - p.object.phones.each_with_index do |phone, index|
-          - m << render('phone_fields', f: ff, phone: phone, index: index)
+          - if confirming
+            - m << render('confirming_phone_fields', f: ff, phone: phone, index: index)
+          - else
+            - m << render('phone_fields', f: ff, phone: phone, index: index)
