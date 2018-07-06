@@ -34,6 +34,14 @@ class Staff::Admin::Base < ApplicationController
     '管理者'
   end
 
+  def login_form
+    Staff::LoginForm
+  end
+
+  def authenticator
+    Staff::Authenticator
+  end
+
   private
   def current_admin_member(id = nil)
     if id

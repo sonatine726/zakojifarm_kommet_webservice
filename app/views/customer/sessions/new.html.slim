@@ -1,0 +1,15 @@
+= form_for @form, url: :customer_session, html:{class:"my-4 p-customer-login-form"} do |f|
+  .form-group.p-customer-form-email
+    = f.label :email, 'メールアドレス'
+    .form-inline
+      = f.text_field :email, class:"form-control input-sm", size: "40"
+  .form-group.p-customer-form-password
+    = f.label :password, 'パスワード'
+    .form-inline
+      = f.password_field :password, class:"form-control input-sm", size: "40"
+  .form-group.p-customer-form-rememberme
+    .form-inline
+      = f.check_box :remember_me, class:"form-control input-sm"
+      = f.label :remember_me, '次回から自動でログインする', class:'ml-3'
+  .p-customer-form-submit
+    = f.submit 'ログイン', class:"btn btn-default"

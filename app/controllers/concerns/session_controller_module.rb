@@ -19,12 +19,12 @@ module SessionControllerModule
   end
 
   def create
-    @form = Staff::LoginForm.new(create_params)
+    @form = login_form.new(create_params)
     if @form.email.present?
       target_member = target_model.find_by(email_for_index: @form.email.downcase)
     end
 
-    if Staff::Authenticator.new(target_member).authenticate(@form.password)
+    if authenticator.new(target_member).authenticate(@form.password)
       if target_member.suspended?
         hook_create_suspended(target_member)
         flash.now.alert = 'アカウントが停止されています。'

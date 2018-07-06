@@ -1,5 +1,5 @@
 .table-wrapper
-  table.table-condensed.table-striped.table-bordered.table-hover.p-staff-tbl
+  table.table-condensed.table-striped.table-bordered.table-hover.p-customer-tbl
     - p = ProgramPresenter.new(@program, self)
     tr
       th タイトル
@@ -16,13 +16,7 @@
     tr
       th 最大参加者数
       td.numeric = p.max_number_of_participants
-    tr
-      th 申し込み件数
-      td.numeric = p.number_of_applicants
-    tr
-      th 登録職員
-      td = p.registrant
   .description
     = @program.description
-
-== render 'entries_form' if @program.number_of_applicants > 0
+  .p-programs-button.text-center.my-4
+    = p.apply_or_cancel_button

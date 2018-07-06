@@ -1,22 +1,22 @@
 @import 'colors';
 @import 'dimensions';
 
-.p-staff_page_header{
+.p-customer_page_header{
   width: 100%;
   background-color: $light_gray;
 }
 
-.p-staff-login-form, .p-customer-form{
+.p-customer-login-form, .p-customer-form{
   padding: $wide * 2;
   border-radius: $wide;
   border: solid 1px $dark_cyan;
   background-color: $very_light_gray;
 }
 
-.p-staff-tbl{
-  .p-staff-tbl__email, .p-staff-tbl__date {font-family: monospace;}
-  .p-staff-tbl__boolean {text-align: center}
-  .p-staff-tbl__actions{
+.p-customer-tbl{
+  .p-customer-tbl__email, .p-customer-tbl__date {font-family: monospace;}
+  .p-customer-tbl__boolean {text-align: center}
+  .p-customer-tbl__actions{
     text-align: center;
     color: $dark_gray;
   }

@@ -12,4 +12,13 @@ module FeatureSpecHelper
       click_button 'ログイン'
     end
   end
+
+  def login_as_customer(customer, password = 'password')
+    visit customer_login_path
+    within('#new_staff_login_form') do
+      fill_in 'staff_login_form_email', with: customer.email
+      fill_in 'staff_login_form_password', with: password
+      click_button 'ログイン'
+    end
+  end
 end

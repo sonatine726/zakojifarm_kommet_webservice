@@ -1,0 +1,13 @@
+@import 'colors';
+@import 'dimensions';
+
+div.field-value {
+  margin-left: $wide;
+  font-weight: bold;
+}
+div.readonly {
+  color: $dark-gray;
+}
+span.field-value{
+  font-weight: bold;
+}

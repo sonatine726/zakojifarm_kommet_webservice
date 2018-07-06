@@ -1,0 +1,15 @@
+.table-wrapper
+  = paginate @programs
+  table.table-condensed.table-striped.table-bordered.table-hover.p-staff-tbl
+    thead
+      tr
+        th タイトル
+        th 申し込み開始日時
+        th 申し込み終了日時
+        th 最小参加者数
+        th 最大参加者数
+        th アクション
+      tbody
+        == render partial: 'program', collection: @programs
+
+  = paginate @programs
