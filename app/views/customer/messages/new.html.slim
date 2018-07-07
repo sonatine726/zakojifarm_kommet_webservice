@@ -1,0 +1,5 @@
+= form_for @message, html:{class:"my-4 p-customer-form"}, url: :confirm_customer_messages do |f|
+  == render 'form', f:f
+  .buttons.text-center
+    = f.submit '確認画面に進む', class:"btn btn-lg btn-primary"
+    = link_to 'キャンセル', :customer_root

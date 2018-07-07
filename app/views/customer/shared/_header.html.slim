@@ -6,6 +6,8 @@ nav.navbar.bg-dark.navbar-dark
         = link_to "ログアウト", :customer_session, method: :delete, class: "nav-link text-secondary"
       li.nav-item
         = link_to "アカウント", :customer_account, class: "nav-link text-secondary"
+      li.nav-item
+        = link_to "問い合わせ", :new_customer_message, class: "nav-link text-secondary"
     - else
       li.nav-item
         = link_to_unless_current "ログイン", :customer_login, class: "nav-link text-secondary"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180702091243) do
+ActiveRecord::Schema.define(version: 20180706083455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,31 @@ ActiveRecord::Schema.define(version: 20180702091243) do
     t.index ["program_id", "customer_id"], name: "index_entries_on_program_id_and_customer_id", unique: true
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "staff_member_id"
+    t.bigint "root_id"
+    t.bigint "parent_id"
+    t.string "type", null: false
+    t.string "status", default: "new", null: false
+    t.string "subject", null: false
+    t.text "body"
+    t.text "remarks"
+    t.boolean "discarded", default: false, null: false
+    t.boolean "deleted", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id", "deleted", "created_at"], name: "index_messages_on_c_d_s_c"
+    t.index ["customer_id", "discarded"], name: "index_messages_on_customer_id_and_discarded"
+    t.index ["customer_id"], name: "index_messages_on_customer_id"
+    t.index ["parent_id"], name: "index_messages_on_parent_id"
+    t.index ["root_id", "deleted", "created_at"], name: "index_messages_on_root_id_and_deleted_and_created_at"
+    t.index ["root_id"], name: "index_messages_on_root_id"
+    t.index ["staff_member_id"], name: "index_messages_on_staff_member_id"
+    t.index ["type", "customer_id"], name: "index_messages_on_type_and_customer_id"
+    t.index ["type", "staff_member_id"], name: "index_messages_on_type_and_staff_member_id"
+  end
+
   create_table "phones", force: :cascade do |t|
     t.bigint "customer_id", null: false
     t.bigint "address_id"
@@ -163,23 +188,6 @@ ActiveRecord::Schema.define(version: 20180702091243) do
     t.index ["family_name_kana", "given_name_kana"], name: "index_staff_members_on_family_name_kana_and_given_name_kana"
   end
 
-  create_table "test_articles", force: :cascade do |t|
-    t.text "title"
-    t.text "body"
-    t.integer "status"
-    t.datetime "published_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "test_comments", force: :cascade do |t|
-    t.integer "article_id"
-    t.string "author"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -217,6 +225,10 @@ ActiveRecord::Schema.define(version: 20180702091243) do
   add_foreign_key "addresses", "customers"
   add_foreign_key "entries", "customers"
   add_foreign_key "entries", "programs"
+  add_foreign_key "messages", "customers"
+  add_foreign_key "messages", "messages", column: "parent_id"
+  add_foreign_key "messages", "messages", column: "root_id"
+  add_foreign_key "messages", "staff_members"
   add_foreign_key "phones", "addresses"
   add_foreign_key "phones", "customers"
   add_foreign_key "programs", "staff_members", column: "registrant_id"
