@@ -6,6 +6,7 @@ module ErrorHandlers
       redirect_to root_url, notice: 'Admin画面へのアクセス権限がありません'
     end
 
+    rescue_from ActionController::BadRequest, with: :rescue400
     rescue_from ActionController::RoutingError, with: :rescue404
     rescue_from ActiveRecord::RecordNotFound, with: :rescue404
     rescue_from ActionController::ParameterMissing, with: :rescue400

@@ -12,3 +12,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile += %w( staff/* staff.js admin.js customer.js)
+
+Sprockets::Context.send(:include, Rails.application.routes.url_helpers)
