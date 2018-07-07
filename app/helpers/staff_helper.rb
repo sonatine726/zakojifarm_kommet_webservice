@@ -3,7 +3,7 @@ module StaffHelper
 
   def number_of_unprocessed_messages
     markup do |m|
-      m.a(href: '#') do
+      m.a(href: '#', class: "nav-link text-secondary") do
         m << '新規問い合わせ'
         if (c = CustomerMessage.unprocessed.count) > 0
           anchor_text = "(#{c})"
