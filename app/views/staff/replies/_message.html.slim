@@ -1,0 +1,13 @@
+- p = MessagePresenter.new(@message, self)
+table.table.table-striped.table-bordered.table-hover.p-staff-tbl
+  tr
+    th 送信者
+    td = p.sender
+  tr
+    th 件名
+    td = p.subject
+  tr
+    th 作成日時
+    td.date = p.created_at
+.body
+  = p.formatted_body
