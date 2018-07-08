@@ -1,0 +1,25 @@
+.table-responsive.my-2
+  = paginate @messages
+  table.table.table-striped.table-bordered.table-hover.p-staff-tbl
+    thead
+      tr
+        th 種類
+        th 送信者
+        th 受信者
+        th 件名
+        th 作成日時
+        th アクション
+      tbody
+        - @messages.each do |m|
+          - p = MessagePresenter.new(m, self)
+          tr
+            td = p.type
+            td = p.sender
+            td = p.receiver
+            td = p.truncated_subject
+            td = p.created_at
+            td.p-staff-tbl__actions
+              = link_to '詳細', staff_message_path(m)
+              | |
+              = link_to_if m.kind_of?(CustomerMessage), '削除', staff_message_path(m), method: :delete, data:{confirm: '本当に削除しますか?'}
+  = paginate @messages
