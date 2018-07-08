@@ -1,4 +1,8 @@
 .table-responsive.my-2
+  - if @message.kind_of?(CustomerMessage)
+    .links.text-right.my-1
+      = link_to '返信する', new_staff_message_reply_path(@message)
+
   table.table.table-striped.table-bordered.table-hover.p-staff-tbl
     - p = MessagePresenter.new(@message, self)
     tr

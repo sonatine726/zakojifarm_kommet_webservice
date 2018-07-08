@@ -1,0 +1,7 @@
+= form_for @reply, html:{class:"my-4 p-staff-form"}, url: confirm_staff_message_reply_path(@message) do |f|
+  == render 'form', f:f
+  .buttons.text-center
+    = f.submit '確認画面に進む', class:"btn btn-primary"
+    = link_to 'キャンセル', :staff_messages
+.my-5
+  == render 'message'

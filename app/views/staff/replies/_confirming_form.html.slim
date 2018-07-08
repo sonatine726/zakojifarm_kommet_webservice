@@ -1,0 +1,5 @@
+= markup(:div, id: 'confirming-panel') do |m|
+  - p = ConfirmingFormPresenter.new(f, self)
+  - m.div '以下の内容で返信します。よろしいですか？'
+  - m << p.text_field_block(:subject, '件名', class_top_div: 'form-group', class_label: 'mr-4', class_between_label_and_text: 'form-inline', class_textf: 'form-control input-sm', textf_size: 40, maxlength: 80)
+  - m << p.text_area_block(:body, '本文', class_top_div: 'form-group')
