@@ -20,6 +20,12 @@
     tr
       th 作成日時
       td.date = p.created_at
+    tr
+      th タグ
+      td
+        = markup(:ul, id: 'tag-it', 'data-message-id' => @message.id) do |m|
+          - @message.tags.each do |tag|
+            - m.li tag.value
   .tree
     = p.tree
   .body

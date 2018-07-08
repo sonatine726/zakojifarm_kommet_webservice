@@ -1,5 +1,6 @@
 class Staff::MessagesController < Staff::Base
   before_action :reject_non_xhr, only: [ :count ]
+  protect_from_forgery except: :tag
 
   def index
     @title = '全メッセージ一覧'
@@ -42,5 +43,19 @@ class Staff::MessagesController < Staff::Base
     message.update_column(:deleted, true)
     flash.notice = '問い合わせを削除しました。'
     redirect_back(fallback_location: staff_messages_path)
+  end
+
+  #POST/DELETE
+  def tag
+    message = CustomerMessage.find(params[:id])
+    if request.post?
+      message.add_tag(params[:label])
+    elsif request.delete?
+      message.remove_tag(params[:label])
+    else
+      raise
+    end
+
+    render plain: 'OK'
   end
 end
