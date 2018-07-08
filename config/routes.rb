@@ -44,7 +44,12 @@ Rails.application.routes.draw do
           post :confirm
         end
       end
-    end
+      resources :tag, only: [] do
+        resources :messages, only: [ :index ] do
+          get :inbound, :outbound, :deleted, on: :collection
+        end
+      end
+     end
   end
 
   constraints host: config[:admin][:host] do

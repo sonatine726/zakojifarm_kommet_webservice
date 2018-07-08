@@ -1,0 +1,7 @@
+.tags
+  | タグ:
+  - Tag.all.each do |tag|
+    - if tag.id == params[:tag_id].to_i
+      span.current_tag = tag.value
+    - else
+      = link_to tag.value, [ :staff, tag, :messages ], class: 'mx-2'

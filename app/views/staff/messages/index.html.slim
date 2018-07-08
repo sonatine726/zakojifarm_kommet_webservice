@@ -23,3 +23,5 @@
               | |
               = link_to_if m.kind_of?(CustomerMessage), '削除', staff_message_path(m), method: :delete, data:{confirm: '本当に削除しますか?'}
   = paginate @messages
+
+  = render 'tags'

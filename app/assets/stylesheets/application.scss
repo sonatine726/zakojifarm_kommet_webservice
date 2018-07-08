@@ -76,3 +76,17 @@ div.description, div.body {
   border: solid 1px $dark_cyan;
   background-color: $very_light_gray;
 }
+
+.ui-helper-hidden-accessible {
+  display:none;
+}
+
+div.tags {
+  margin: $wide 0;
+  padding: $wide;
+  background-color: $very_light_gray;
+
+  span.current_tag{
+    font-weight: bold;
+  }
+}
