@@ -19,7 +19,16 @@
 #
 
 FactoryBot.define do
-  factory :message do
-    
+  factory :customer_message do
+    subject 'Subject'
+    body "Body.\nBody."
+    customer
+  end
+
+  factory :staff_message do
+    subject 'Staff Subject'
+    body "Staff Body.\nStaff Body."
+    parent { FactoryBot.create(:customer_message)}
+    staff_member
   end
 end

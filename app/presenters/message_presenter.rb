@@ -54,7 +54,7 @@ class MessagePresenter < ModelPresenter
   end
 
   def tree
-    expand(object.root || object)
+    expand(object.tree.root)
   end
 
   private
@@ -68,7 +68,7 @@ class MessagePresenter < ModelPresenter
           m << link_to(node.subject, view_context.staff_message_path(node))
         end
 
-        node.children.each do |c|
+        node.child_nodes.each do |c|
           m << expand(c)
         end
       end
