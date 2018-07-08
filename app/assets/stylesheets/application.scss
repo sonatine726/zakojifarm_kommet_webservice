@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require jquery-ui/datepicker
+ *= require jquery.tagit
  *= require_tree ./shared
  *= require_self
  */
@@ -74,4 +75,18 @@ div.description, div.body {
   padding: $wide * 2;
   border: solid 1px $dark_cyan;
   background-color: $very_light_gray;
+}
+
+.ui-helper-hidden-accessible {
+  display:none;
+}
+
+div.tags {
+  margin: $wide 0;
+  padding: $wide;
+  background-color: $very_light_gray;
+
+  span.current_tag{
+    font-weight: bold;
+  }
 }

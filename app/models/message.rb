@@ -23,6 +23,8 @@ class Message < ApplicationRecord
   belongs_to :staff_member, optional: true
   belongs_to :root, class_name: 'Message', optional: true
   belongs_to :parent, class_name: 'Message', optional: true
+  has_many :message_tag_links, dependent: :destroy
+  has_many :tags, -> { order(:value) }, through: :message_tag_links
 
   validates :subject, :body, presence: true
   validates :subject, length: { maximum: 80, allow_blank: true }
@@ -51,5 +53,28 @@ class Message < ApplicationRecord
     r = root || self
     messages = Message.where(root_id: r.id).select(:id, :parent_id, :subject)
     @tree = SimpleTree.new(r, messages)
+  end
+
+  def add_tag(label)
+    self.class.transaction do
+      HashLock.acquire('tags', 'value', label)
+      tag = Tag.find_by(value: label)
+      tag ||= Tag.create!(value: label)
+      unless message_tag_links.where(tag_id: tag.id).exists?
+        message_tag_links.create!(tag_id: tag.id)
+      end
+    end
+  end
+
+  def remove_tag(label)
+    self.class.transaction do
+      HashLock.acquire('tags', 'value', label)
+      if tag = Tag.find_by(value: label)
+        message_tag_links.find_by(tag_id: tag.id).destroy
+        if tag.message_tag_links.empty?
+          tag.destroy
+        end
+      end
+    end
   end
 end

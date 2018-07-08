@@ -1,7 +1,5 @@
 .table-responsive.my-2
-  - if @message.kind_of?(CustomerMessage)
-    .links.text-right.my-1
-      = link_to '返信する', new_staff_message_reply_path(@message)
+  = render 'links'
 
   table.table.table-striped.table-bordered.table-hover.p-staff-tbl
     - p = MessagePresenter.new(@message, self)
@@ -20,6 +18,12 @@
     tr
       th 作成日時
       td.date = p.created_at
+    tr
+      th タグ
+      td
+        = markup(:ul, id: 'tag-it', 'data-message-id' => @message.id) do |m|
+          - @message.tags.each do |tag|
+            - m.li tag.value
   .tree
     = p.tree
   .body

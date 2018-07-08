@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706083455) do
+ActiveRecord::Schema.define(version: 20180708153532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,25 @@ ActiveRecord::Schema.define(version: 20180706083455) do
     t.index ["program_id", "customer_id"], name: "index_entries_on_program_id_and_customer_id", unique: true
   end
 
+  create_table "hash_locks", force: :cascade do |t|
+    t.string "table", null: false
+    t.string "column", null: false
+    t.string "key", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["table", "column", "key"], name: "index_hash_locks_on_table_and_column_and_key", unique: true
+  end
+
+  create_table "message_tag_links", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id", "tag_id"], name: "index_message_tag_links_on_message_id_and_tag_id", unique: true
+    t.index ["message_id"], name: "index_message_tag_links_on_message_id"
+    t.index ["tag_id"], name: "index_message_tag_links_on_tag_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.bigint "customer_id", null: false
     t.bigint "staff_member_id"
@@ -188,6 +207,30 @@ ActiveRecord::Schema.define(version: 20180706083455) do
     t.index ["family_name_kana", "given_name_kana"], name: "index_staff_members_on_family_name_kana_and_given_name_kana"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["value"], name: "index_tags_on_value", unique: true
+  end
+
+  create_table "test_articles", force: :cascade do |t|
+    t.text "title"
+    t.text "body"
+    t.integer "status"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "test_comments", force: :cascade do |t|
+    t.integer "article_id"
+    t.string "author"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -225,6 +268,8 @@ ActiveRecord::Schema.define(version: 20180706083455) do
   add_foreign_key "addresses", "customers"
   add_foreign_key "entries", "customers"
   add_foreign_key "entries", "programs"
+  add_foreign_key "message_tag_links", "messages"
+  add_foreign_key "message_tag_links", "tags"
   add_foreign_key "messages", "customers"
   add_foreign_key "messages", "messages", column: "parent_id"
   add_foreign_key "messages", "messages", column: "root_id"
