@@ -1,3 +1,10 @@
 ul.menu.list-group.py-3
   li.list-group-item.list-group-item-action = link_to '顧客管理', :staff_customers
   li.list-group-item.list-group-item-action = link_to 'プログラム管理', :staff_programs
+  li.list-group-item 
+    | メッセージ管理
+    ul.menu.list-group
+        li.list-group-item.list-group-item-action = link_to '問い合わせ一覧', :inbound_staff_messages
+        li.list-group-item.list-group-item-action = link_to '返信一覧', :outbound_staff_messages
+        li.list-group-item.list-group-item-action = link_to '全メッセージ一覧', :staff_messages
+        li.list-group-item.list-group-item-action = link_to 'ゴミ箱', :deleted_staff_messages

@@ -3,7 +3,7 @@
 # Table name: programs
 #
 #  id                         :bigint(8)        not null, primary key
-#  staff_members_id           :bigint(8)        not null
+#  registrant_id              :bigint(8)        not null
 #  title                      :string           not null
 #  description                :text
 #  application_start_time     :datetime         not null

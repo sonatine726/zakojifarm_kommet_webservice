@@ -69,3 +69,9 @@ div.error-message:before {
   margin-left: 1rem;
   font-size: 0.8rem;
 }
+
+div.description, div.body {
+  padding: $wide * 2;
+  border: solid 1px $dark_cyan;
+  background-color: $very_light_gray;
+}
