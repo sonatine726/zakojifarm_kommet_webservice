@@ -1,7 +1,6 @@
 class Staff::MessagesController < Staff::Base
   before_action :reject_non_xhr, only: [ :count ]
 
-  #GET
   def index
     @title = '全メッセージ一覧'
     @messages = Message.where(deleted: false).page(params[:page])
@@ -33,7 +32,11 @@ class Staff::MessagesController < Staff::Base
     render plain: CustomerMessage.unprocessed.count
   end
 
-  #DELETE
+  def show
+    @title = 'メッセージ詳細'
+    @message = Message.find(params[:id])
+  end
+
   def destroy
     message = CustomerMessage.find(params[:id])
     message.update_column(:deleted, true)

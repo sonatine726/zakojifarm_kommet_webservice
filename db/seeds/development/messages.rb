@@ -6,7 +6,7 @@ s = 2.years.ago
   m = CustomerMessage.create!(
     customer: customers.sample,
     subject: 'これは問い合わせです。' * 4,
-    body: 'これは問い合わせです。\n' * 8,
+    body: "これは問い合わせです。\n" * 8,
     created_at: s.advance(months: n)
   )
   pp m
@@ -17,7 +17,7 @@ s = 2.years.ago
     root: m,
     parent: m,
     subject: 'これは返信です' * 4,
-    body: 'これは返信です\n' * 8,
+    body: "これは返信です\n" * 8,
     created_at: s.advance(months: n, hours: 1)
   )
   pp r
@@ -51,7 +51,7 @@ s = 24.hours.ago
   m = CustomerMessage.create!(
     customer: customers.sample,
     subject: 'これは問い合わせです。' * 2,
-    body: 'これは問い合わせです。\n' * 4,
+    body: "これは問い合わせです。\n" * 4,
     created_at: s.advance(hours: n * 3)
   )
   pp mm

@@ -1,0 +1,20 @@
+.table-responsive.my-2
+  table.table.table-striped.table-bordered.table-hover.p-staff-tbl
+    - p = MessagePresenter.new(@message, self)
+    tr
+      th 種類
+      td = p.type
+    tr
+      th 送信者
+      td = p.sender
+    tr
+      th 受信者
+      td = p.receiver
+    tr
+      th 件名
+      td = p.subject
+    tr
+      th 作成日時
+      td.date = p.created_at
+  .body
+    = p.formatted_body
