@@ -32,4 +32,12 @@ class Staff::MessagesController < Staff::Base
   def count
     render plain: CustomerMessage.unprocessed.count
   end
+
+  #DELETE
+  def destroy
+    message = CustomerMessage.find(params[:id])
+    message.update_column(:deleted, true)
+    flash.notice = '問い合わせを削除しました。'
+    redirect_back(fallback_location: staff_messages_path)
+  end
 end
