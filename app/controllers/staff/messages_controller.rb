@@ -5,32 +5,34 @@ class Staff::MessagesController < Staff::Base
   def index
     @title = '全メッセージ一覧'
     @messages = Message.where(deleted: false)
-
-    if params[:tag_id]
-      @messages = @messages.joins(:message_tag_links).where('message_tag_links.tag_id' => params[:tag_id])
-    end
-
+    narrow_down
     @messages = @messages.page(params[:page])
   end
 
   #GET
   def inbound
     @title = '問い合わせ一覧'
-    @messages = CustomerMessage.where(deleted: false).page(params[:page])
+    @messages = CustomerMessage.where(deleted: false)
+    narrow_down
+    @messages = @messages.page(params[:page])
     render action: 'index'
   end
 
   #GET
   def outbound
     @title = '返信一覧'
-    @messages = StaffMessage.where(deleted: false).page(params[:page])
+    @messages = StaffMessage.where(deleted: false)
+    narrow_down
+    @messages = @messages.page(params[:page])
     render action: 'index'
   end
 
   #GET
   def deleted
     @title = 'メッセージ一覧(ゴミ箱)'
-    @messages = Message.where(deleted: true).page(params[:page])
+    @messages = Message.where(deleted: true)
+    narrow_down
+    @messages = @messages.page(params[:page])
     render action: 'index'
   end
   
@@ -63,5 +65,13 @@ class Staff::MessagesController < Staff::Base
     end
 
     render plain: 'OK'
+  end
+
+  private
+
+  def narrow_down
+    if params[:tag_id]
+      @messages = @messages.joins(:message_tag_links).where('message_tag_links.tag_id' => params[:tag_id])
+    end
   end
 end

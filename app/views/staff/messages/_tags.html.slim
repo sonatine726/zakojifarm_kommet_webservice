@@ -4,4 +4,7 @@
     - if tag.id == params[:tag_id].to_i
       span.current_tag = tag.value
     - else
-      = link_to tag.value, [ :staff, tag, :messages ], class: 'mx-2'
+      - link_url = [ :staff, tag, :messages ]
+      - unless params[:action] == 'index'
+        - link_url.unshift(params[:action])
+      = link_to tag.value, link_url, class: 'mx-2'
